@@ -70,6 +70,7 @@ public class Game {
 	public static void main(String[] args) {
 		
 		printBoard();
+		//test commit
 	}
 
 }
