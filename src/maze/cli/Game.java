@@ -1,6 +1,7 @@
 package maze.cli;
 
 import java.io.Console;
+import java.util.Scanner;
 
 import Proj.Labirinto;
 
@@ -79,9 +80,9 @@ public class Game {
 		while(true)
 		{
 			printBoard();
-			Console console = System.console();
+			Scanner sc = new Scanner(System.in);
 			System.out.println("Insira as coordenadas:");
-			String s = console.readLine();
+			String s = sc.nextLine();
 			d=s.charAt(0);
 			
 			if (move(d)==true)
@@ -90,6 +91,8 @@ public class Game {
 			}
 			else
 				break;
+			
+			sc.close();
 		}
 	}
 
