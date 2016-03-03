@@ -1,5 +1,7 @@
 package maze.cli;
 
+import java.io.Console;
+
 import Proj.Labirinto;
 
 public class Game {
@@ -23,7 +25,7 @@ public class Game {
 		}
 	}
 	
-	public boolean move(char direction){
+	public static boolean move(char direction){
 		
 		Labirinto lab = new Labirinto();
 		char[][] board = new char[10][10];
@@ -69,7 +71,26 @@ public class Game {
 
 	public static void main(String[] args) {
 		
-		printBoard();
+		Labirinto lab = new Labirinto();
+		
+		char d;
+		
+		
+		while(true)
+		{
+			printBoard();
+			Console console = System.console();
+			System.out.println("Insira as coordenadas:");
+			String s = console.readLine();
+			d=s.charAt(0);
+			
+			if (move(d)==true)
+			{
+				lab.makeMove(d);
+			}
+			else
+				break;
+		}
 	}
 
 }

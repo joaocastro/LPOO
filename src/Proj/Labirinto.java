@@ -104,13 +104,14 @@ public class Labirinto {
 					}
 					else if (heroi==1)
 					{
-						//perde o jogo
+						System.exit(0);
 					}
 				}
 				else if (table[line-1][col]=='S')
 				{
 					if (heroi==2){
-						/*termina o jogo*/}
+						System.exit(0);
+						}
 					else
 						break;
 				}
@@ -142,13 +143,15 @@ public class Labirinto {
 					}
 					else if (heroi==1)
 					{
-						//perde o jogo
+						System.exit(0);
 					}
 				}
 				else if (table[line+1][col]=='S')
 				{
 					if (heroi==2){
-						/*termina o jogo*/}
+						System.out.println("Parabéns! Ganhou!");
+						System.exit(0);
+						}
 					else
 						break;
 				}
@@ -180,13 +183,14 @@ public class Labirinto {
 					}
 					else if (heroi==1)
 					{
-						//perde o jogo
+						System.exit(0);
 					}
 				}
 				else if (table[line][col+1]=='S')
 				{
 					if (heroi==2){
-						/*termina o jogo*/}
+						System.out.println("Parabéns! Ganhou!");
+						System.exit(0);}
 					else
 						break;
 				}
@@ -218,13 +222,14 @@ public class Labirinto {
 					}
 					else if (heroi==1)
 					{
-						//perde o jogo
+						System.exit(0);
 					}
 				}
 				else if (table[line][col-1]=='S')
 				{
 					if (heroi==2){
-						/*termina o jogo*/}
+						System.out.println("Parabéns! Ganhou!");
+						System.exit(0);}
 					else
 						break;
 				}
