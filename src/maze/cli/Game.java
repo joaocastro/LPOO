@@ -4,6 +4,7 @@ import java.io.Console;
 import java.util.Scanner;
 
 import Proj.Labirinto;
+import Proj.hero;
 
 public class Game {
 	
@@ -26,56 +27,13 @@ public class Game {
 		}
 	}
 	
-	public static boolean move(char direction){
-		
-		Labirinto lab = new Labirinto();
-		char[][] board = new char[10][10];
-		board=lab.getTable();
-		int pos[] = lab.getPos();
-		int line = pos[0];
-		int col = pos[1];
-		boolean move2 = true;
-		
-		switch(direction) {
-		
-		case('N'):
-		{
-			if (board[line-1][col]=='X')
-				move2 = false;
-			else
-				move2 = true;
-		}
-		case('S'):
-		{
-			if (board[line+1][col]=='X')
-				move2 = false;
-			else
-				move2 = true;
-		}
-		case('E'):
-		{
-			if (board[line][col+1]=='X')
-				move2 = false;
-			else
-				move2 = true;
-		}
-		case('O'):
-		{
-			if (board[line][col-1]=='X')
-				move2 = false;
-			else
-				move2 = true;
-		}
-		}
-		return move2;
-	}
 
 	public static void main(String[] args) {
 		
-<<<<<<< HEAD
 		Labirinto lab = new Labirinto();
+		hero heroi = new hero(1,1);
 		
-		char direction;
+		String direction;
 		
 		
 		while(true)
@@ -84,21 +42,14 @@ public class Game {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Insira as coordenadas:");
 			String s = sc.nextLine();
-			direction=s.charAt(0);
+			direction=s;
 			
-			if (move(direction)==true)
-			{
-				lab.makeMove(direction);
-			}
-			else
-				break;
+			heroi.moveHero(lab, direction);
+
 			
-			sc.close();
 		}
-=======
-		printBoard();
+		//printBoard();
 		//test commit
->>>>>>> origin/master
 	}
 
 }
