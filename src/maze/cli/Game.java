@@ -74,7 +74,7 @@ public class Game {
 		
 		Labirinto lab = new Labirinto();
 		
-		char d;
+		char direction;
 		
 		
 		while(true)
@@ -83,11 +83,11 @@ public class Game {
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Insira as coordenadas:");
 			String s = sc.nextLine();
-			d=s.charAt(0);
+			direction=s.charAt(0);
 			
-			if (move(d)==true)
+			if (move(direction)==true)
 			{
-				lab.makeMove(d);
+				lab.makeMove(direction);
 			}
 			else
 				break;
