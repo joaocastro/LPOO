@@ -80,9 +80,9 @@ public class Game {
 			
 			if (win(heroi, dragao)){
 				Labirinto temp2 = new Labirinto();
+				temp2.printDragon(dragao);
 				temp2.printHero(heroi);
 				temp2.printSword(espada);
-				temp2.printDragon(dragao);
 				temp2.printBoard();
 				System.out.println("Parabens, ganhou o jogo!");
 				break;
@@ -90,13 +90,25 @@ public class Game {
 			
 			if (check(lab, heroi, dragao) == false){
 				Labirinto temp = new Labirinto();
+				temp.printDragon(dragao);
 				temp.printHero(heroi);
 				temp.printSword(espada);
-				temp.printDragon(dragao);
 				temp.printBoard();
 				System.out.println("Perdeu o jogo");
 				break;
-			}			
+			}
+			
+			dragao.randomPosition();
+			
+			if (check(lab, heroi, dragao) == false){
+				Labirinto temp = new Labirinto();
+				temp.printDragon(dragao);
+				temp.printHero(heroi);
+				temp.printSword(espada);
+				temp.printBoard();
+				System.out.println("Perdeu o jogo");
+				break;
+			}
 		}
 
 	}

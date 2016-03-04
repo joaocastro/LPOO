@@ -41,10 +41,28 @@ public class dragon extends character{
 		
 		Labirinto lab = new Labirinto();
 		Random rn = new Random();
-		int x, y;
+		int x, y, rand;
 		
-		x=rn.nextInt(10);
-		y=rn.nextInt(10);
+		rand = rn.nextInt(3);
+		
+		switch(rand){
+		case 0:
+			x = pos_x + 1;
+			y = pos_y;
+			break;
+		case 1:
+			x = pos_x - 1;
+			y = pos_y;
+			break;
+		case 2:
+			x = pos_x;
+			y = pos_y + 1;
+			break;
+		default:
+			x = pos_x;
+			y = pos_y - 1;
+			break;
+		}
 			
 		if (checkmove(lab, x, y)==true)
 			moveDragon(x, y);
