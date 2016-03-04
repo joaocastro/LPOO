@@ -1,9 +1,5 @@
 package Proj;
 
-import java.util.ArrayList;
-
-import maze.cli.Game;
-
 public class Labirinto extends character{
 	
 	private char table[][];
@@ -48,5 +44,10 @@ public class Labirinto extends character{
 	public void printSword(sword espada){
 		if (espada.getState() == true)
 			table[espada.getPos_x()][espada.getPos_y()] = espada.getName();
+	}
+	
+	public void printDragon(dragon dragao) {
+		if (dragao.getState() == true)
+			table[dragao.getPos_x()][dragao.getPos_y()] = dragao.getName();
 	}
 }

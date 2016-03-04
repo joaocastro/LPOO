@@ -48,6 +48,15 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
+			else if (lab.getTable()[pos_x - 1][pos_y] == 'D')
+			{
+				if(tipo == 'A'){
+					pos_x--;
+				equipHero();
+				espada.changeState();
+				dragao.changeState();
+				}
+			}
 			break;
 		case "s":
 		case "S":
@@ -60,6 +69,15 @@ public class hero extends character{
 				pos_x++;
 				equipHero();
 				espada.changeState();
+			}
+			else if (lab.getTable()[pos_x + 1][pos_y] == 'D')
+			{
+				if(tipo == 'A'){
+					pos_x++;
+				equipHero();
+				espada.changeState();
+				dragao.changeState();
+				}
 			}
 			break;
 		case "e":
@@ -74,6 +92,19 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
+			else if (lab.getTable()[pos_x][pos_y + 1] == 'D')
+			{
+				if(tipo == 'A'){
+					pos_y++;
+				equipHero();
+				espada.changeState();
+				dragao.changeState();
+				}
+			}
+			else if (lab.getTable()[pos_x][pos_y + 1] == 'S' && tipo == 'A')
+			{
+				pos_y++;
+			}
 			break;
 		case "o":
 		case "O":
@@ -86,6 +117,15 @@ public class hero extends character{
 				pos_y--;
 				equipHero();
 				espada.changeState();
+			}
+			else if (lab.getTable()[pos_x][pos_y - 1] == 'D')
+			{
+				if(tipo == 'A'){
+					pos_y--;
+				equipHero();
+				espada.changeState();
+				dragao.changeState();
+				}
 			}
 			break;
 		}

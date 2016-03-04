@@ -3,10 +3,12 @@ package Proj;
 public class dragon extends character{
 	
 	private boolean state = true;
+	private char tipo;
 	
 	public dragon(int x, int y){
 		pos_x = x;
 		pos_y = y;
+		tipo = 'D';
 	}
 	
 	public boolean isAlive() {
@@ -19,6 +21,10 @@ public class dragon extends character{
 	
 	public int getPos_y(){
 		return pos_y;
+	}
+	
+	public char getName(){
+		return tipo;
 	}
 	
 	public void changeState() {

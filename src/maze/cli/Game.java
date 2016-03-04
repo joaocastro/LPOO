@@ -1,6 +1,5 @@
 package maze.cli;
 
-import java.io.Console;
 import java.util.Scanner;
 
 import Proj.Labirinto;
@@ -13,7 +12,14 @@ public class Game {
 	public Game(){		
 	}
 	
-	public boolean check(Labirinto lab, hero heroi, dragon dragao)
+	public static boolean win(hero heroi, dragon dragao){
+		if (heroi.getPos_x() == 5 && heroi.getPos_y() == 9 && dragao.getState() == false)
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean check(Labirinto lab, hero heroi, dragon dragao)
 	{
 		boolean temp = true;
 		
@@ -62,6 +68,7 @@ public class Game {
 			Labirinto lab = new Labirinto();
 			lab.printHero(heroi);
 			lab.printSword(espada);
+			lab.printDragon(dragao);
 			lab.printBoard();
 			
 			Scanner sc = new Scanner(System.in);
@@ -70,8 +77,26 @@ public class Game {
 			direction=s;
 			
 			heroi.moveHero(lab, direction, espada, dragao);
-
 			
+			if (win(heroi, dragao)){
+				Labirinto temp2 = new Labirinto();
+				temp2.printHero(heroi);
+				temp2.printSword(espada);
+				temp2.printDragon(dragao);
+				temp2.printBoard();
+				System.out.println("Parabens, ganhou o jogo!");
+				break;
+			}
+			
+			if (check(lab, heroi, dragao) == false){
+				Labirinto temp = new Labirinto();
+				temp.printHero(heroi);
+				temp.printSword(espada);
+				temp.printDragon(dragao);
+				temp.printBoard();
+				System.out.println("Perdeu o jogo");
+				break;
+			}			
 		}
 
 	}
