@@ -21,6 +21,10 @@ public class hero {
 		return pos_y;
 	}
 	
+	public char getName(){
+		return tipo;
+	}
+	
 	public void equipHero() {
 		tipo = 'A';
 	}
@@ -36,30 +40,18 @@ public class hero {
 		{
 		case "n":
 		case "N":
-			if (lab.getTable()[pos_x][pos_y - 1] == ' ')
+			if (lab.getTable()[pos_x - 1][pos_y] == ' ')
 			{
-				pos_y--;
+				pos_x--;
 			}
-			if (lab.getTable()[pos_x][pos_y - 1] == 'E')
+			if (lab.getTable()[pos_x - 1][pos_y] == 'E')
 			{
-				pos_y--;
+				pos_x--;
 				equipHero();
 			}
 			break;
 		case "s":
 		case "S":
-			if (lab.getTable()[pos_x][pos_y + 1] == ' ')
-			{
-				pos_y--;
-			}
-			if (lab.getTable()[pos_x][pos_y + 1] == 'E')
-			{
-				pos_y++;
-				equipHero();
-			}
-			break;
-		case "e":
-		case "E":
 			if (lab.getTable()[pos_x + 1][pos_y] == ' ')
 			{
 				pos_x++;
@@ -70,15 +62,27 @@ public class hero {
 				equipHero();
 			}
 			break;
+		case "e":
+		case "E":
+			if (lab.getTable()[pos_x][pos_y + 1] == ' ')
+			{
+				pos_y++;
+			}
+			if (lab.getTable()[pos_x][pos_y + 1] == 'E')
+			{
+				pos_y++;
+				equipHero();
+			}
+			break;
 		case "o":
 		case "O":
-			if (lab.getTable()[pos_x - 1][pos_y] == ' ')
+			if (lab.getTable()[pos_x][pos_y - 1] == ' ')
 			{
 				pos_y--;
 			}
-			if (lab.getTable()[pos_x - 1][pos_y] == 'E')
+			if (lab.getTable()[pos_x][pos_y - 1] == 'E')
 			{
-				pos_x--;
+				pos_y--;
 				equipHero();
 			}
 			break;

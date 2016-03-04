@@ -28,4 +28,20 @@ public class Labirinto {
 		
 		return table;
 	}
+	
+	public void printBoard(){
+		
+		for (int i=0; i<10; i++)
+		{
+			for(int j=0; j<10; j++)
+			{
+				System.out.print(table[i][j]);
+			}
+			System.out.println();
+		}
+	}
+	
+	public void printHero(hero heroi){
+		table[heroi.getPos_x()][heroi.getPos_y()] = heroi.getName();
+	}
 }
