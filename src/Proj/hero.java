@@ -33,7 +33,7 @@ public class hero {
 		return state;
 	}
 	
-	public void moveHero(Labirinto lab, String direction) {
+	public void moveHero(Labirinto lab, String direction, sword espada) {
 		
 		
 		switch(direction)
@@ -44,10 +44,11 @@ public class hero {
 			{
 				pos_x--;
 			}
-			if (lab.getTable()[pos_x - 1][pos_y] == 'E')
+			else if (lab.getTable()[pos_x - 1][pos_y] == 'E')
 			{
 				pos_x--;
 				equipHero();
+				espada.changeState();
 			}
 			break;
 		case "s":
@@ -56,10 +57,11 @@ public class hero {
 			{
 				pos_x++;
 			}
-			if (lab.getTable()[pos_x + 1][pos_y] == 'E')
+			else if (lab.getTable()[pos_x + 1][pos_y] == 'E')
 			{
 				pos_x++;
 				equipHero();
+				espada.changeState();
 			}
 			break;
 		case "e":
@@ -68,10 +70,11 @@ public class hero {
 			{
 				pos_y++;
 			}
-			if (lab.getTable()[pos_x][pos_y + 1] == 'E')
+			else if (lab.getTable()[pos_x][pos_y + 1] == 'E')
 			{
 				pos_y++;
 				equipHero();
+				espada.changeState();
 			}
 			break;
 		case "o":
@@ -80,10 +83,11 @@ public class hero {
 			{
 				pos_y--;
 			}
-			if (lab.getTable()[pos_x][pos_y - 1] == 'E')
+			else if (lab.getTable()[pos_x][pos_y - 1] == 'E')
 			{
 				pos_y--;
 				equipHero();
+				espada.changeState();
 			}
 			break;
 		}

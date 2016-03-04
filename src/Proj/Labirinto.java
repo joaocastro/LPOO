@@ -44,4 +44,9 @@ public class Labirinto {
 	public void printHero(hero heroi){
 		table[heroi.getPos_x()][heroi.getPos_y()] = heroi.getName();
 	}
+	
+	public void printSword(sword espada){
+		if (espada.getState() == true)
+			table[espada.getPos_x()][espada.getPos_y()] = espada.getName();
+	}
 }
