@@ -72,6 +72,7 @@ public class Game {
 
 	public static void main(String[] args) {
 		
+<<<<<<< HEAD
 		Labirinto lab = new Labirinto();
 		
 		char direction;
@@ -94,6 +95,10 @@ public class Game {
 			
 			sc.close();
 		}
+=======
+		printBoard();
+		//test commit
+>>>>>>> origin/master
 	}
 
 }
