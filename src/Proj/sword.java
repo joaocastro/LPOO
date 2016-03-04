@@ -1,11 +1,9 @@
 package Proj;
 
-public class sword {
+public class sword extends character{
 	
-	private int pos_x;
-	private int pos_y;
 	private char tipo;
-	private boolean state = true; // pode não ser necessário
+	private boolean state = true;
 	
 	public sword(int x, int y){
 		pos_x = x;

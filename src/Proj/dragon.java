@@ -1,9 +1,7 @@
 package Proj;
 
-public class dragon {
+public class dragon extends character{
 	
-	private int pos_x;
-	private int pos_y;
 	private boolean state = true;
 	
 	public dragon(int x, int y){
@@ -12,6 +10,22 @@ public class dragon {
 	}
 	
 	public boolean isAlive() {
+		return state;
+	}
+	
+	public int getPos_x(){
+		return pos_x;
+	}
+	
+	public int getPos_y(){
+		return pos_y;
+	}
+	
+	public void changeState() {
+		state = false;
+	}
+	
+	public boolean getState() {	
 		return state;
 	}
 	

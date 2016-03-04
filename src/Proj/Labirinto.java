@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import maze.cli.Game;
 
-public class Labirinto {
+public class Labirinto extends character{
 	
 	private char table[][];
 	

@@ -1,9 +1,7 @@
 package Proj;
 
-public class hero {
-	
-	private int pos_x;
-	private int pos_y;
+public class hero extends character{
+
 	private char tipo;
 	private boolean state = true;
 	
@@ -33,7 +31,7 @@ public class hero {
 		return state;
 	}
 	
-	public void moveHero(Labirinto lab, String direction, sword espada) {
+	public void moveHero(Labirinto lab, String direction, sword espada, dragon dragao) {
 		
 		
 		switch(direction)
