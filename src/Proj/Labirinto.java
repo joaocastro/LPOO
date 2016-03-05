@@ -15,7 +15,7 @@ public class Labirinto extends character{
 		{'X',' ',' ',' ', ' ', ' ', ' ', 'X', ' ', 'S'},
 		{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
 		{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-		{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
+		{'X',' ','X','X', ' ', ' ', ' ', ' ', ' ', 'X'},
 		{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'}
 		};
 	}
@@ -32,6 +32,7 @@ public class Labirinto extends character{
 			for(int j=0; j<10; j++)
 			{
 				System.out.print(table[i][j]);
+				System.out.print(' ');
 			}
 			System.out.println();
 		}

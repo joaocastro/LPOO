@@ -19,39 +19,15 @@ public class Game {
 			return false;
 	}
 	
-	public static boolean check(Labirinto lab, hero heroi, dragon dragao)
+	public static boolean check(hero heroi, dragon dragao)
 	{
-		boolean temp = true;
-		
-		if (lab.getTable()[heroi.pos_x-1][heroi.pos_y]=='D')
-			
-			if (heroi.getName()=='A')
-				temp = true;
-			else if (heroi.getName()=='H')
-				temp = false;
-		
-		if (lab.getTable()[heroi.pos_x+1][heroi.pos_y]=='D')
-			
-			if (heroi.getName()=='A')
-				temp = true;
-			else if (heroi.getName()=='H')
-				temp = false;
-		
-		if (lab.getTable()[heroi.pos_x][heroi.pos_y-1]=='D')
-			
-			if (heroi.getName()=='A')
-				temp = true;
-			else if (heroi.getName()=='H')
-				temp = false;
-		
-		if (lab.getTable()[heroi.pos_x][heroi.pos_y+1]=='D')
-			
-			if (heroi.getName()=='A')
-				temp = true;
-			else if (heroi.getName()=='H')
-				temp = false;
-				
-		return temp;
+		if(		(heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
+				(heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
+				(heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()) ||
+				(heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
+			if(heroi.getName() == 'H')
+				return false;
+		return true;
 	}
 		
 	public static void main(String[] args) {
@@ -72,7 +48,7 @@ public class Game {
 			lab.printBoard();
 			
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Insira as coordenadas:");
+			System.out.println("Faca um movimento(NSEO):");
 			String s = sc.nextLine();
 			direction=s;
 			
@@ -88,7 +64,7 @@ public class Game {
 				break;
 			}
 			
-			if (check(lab, heroi, dragao) == false){
+			if (check(heroi, dragao) == false){
 				Labirinto temp = new Labirinto();
 				temp.printDragon(dragao);
 				temp.printHero(heroi);
@@ -98,9 +74,9 @@ public class Game {
 				break;
 			}
 			
-			dragao.randomPosition();
+			dragao.randomPosition(espada);
 			
-			if (check(lab, heroi, dragao) == false){
+			if (check(heroi, dragao) == false){
 				Labirinto temp = new Labirinto();
 				temp.printDragon(dragao);
 				temp.printHero(heroi);
