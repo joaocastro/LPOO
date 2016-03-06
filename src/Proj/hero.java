@@ -48,7 +48,7 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
-			else if (lab.getTable()[pos_x - 1][pos_y] == 'D')
+			else if (lab.getTable()[pos_x - 1][pos_y] == 'D' || lab.getTable()[pos_x - 1][pos_y] == 'd')
 			{
 				if(tipo == 'A'){
 					pos_x--;
@@ -70,7 +70,7 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
-			else if (lab.getTable()[pos_x + 1][pos_y] == 'D')
+			else if (lab.getTable()[pos_x + 1][pos_y] == 'D' || lab.getTable()[pos_x + 1][pos_y] == 'd')
 			{
 				if(tipo == 'A'){
 					pos_x++;
@@ -92,7 +92,7 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
-			else if (lab.getTable()[pos_x][pos_y + 1] == 'D')
+			else if (lab.getTable()[pos_x][pos_y + 1] == 'D' || lab.getTable()[pos_x][pos_y + 1] == 'd')
 			{
 				if(tipo == 'A'){
 					pos_y++;
@@ -118,7 +118,7 @@ public class hero extends character{
 				equipHero();
 				espada.changeState();
 			}
-			else if (lab.getTable()[pos_x][pos_y - 1] == 'D')
+			else if (lab.getTable()[pos_x][pos_y - 1] == 'D' || lab.getTable()[pos_x][pos_y - 1] == 'd')
 			{
 				if(tipo == 'A'){
 					pos_y--;

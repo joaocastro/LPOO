@@ -1,16 +1,19 @@
 package Proj;
 
 import java.util.Random;
+import java.lang.Character;
 
 public class dragon extends character{
 	
 	private boolean state = true;
 	private char tipo;
+	private boolean sleep;
 	
 	public dragon(int x, int y){
 		pos_x = x;
 		pos_y = y;
 		tipo='D';
+		sleep = false;
 	}
 	
 	public boolean isAlive() {
@@ -86,12 +89,34 @@ public class dragon extends character{
 	
 	public void moveDragon(int x, int y, sword espada){
 		
-		pos_x=x;
-		pos_y=y;
-		
-		if (x == 8 && y == 1 && espada.getState() == true)
-			tipo = 'F';
+		if (sleep == false) {
+			pos_x = x;
+			pos_y = y;
+
+			if (x == 8 && y == 1 && espada.getState() == true)
+				tipo = 'F';
+			else
+				tipo = 'D';
+		}
+	}
+	
+	public void Sleep(){
+		sleep = true;
+		tipo = Character.toLowerCase(tipo);
+	}
+	
+	public void WakeUp(){
+		sleep = false;
+		tipo = Character.toUpperCase(tipo);
+	}
+	
+	public void randomSleep(){
+		Random rn = new Random();
+		int rand;
+		rand = rn.nextInt(2);
+		if(rand == 0)
+			Sleep();
 		else
-			tipo = 'D';
+			WakeUp();
 	}
 }

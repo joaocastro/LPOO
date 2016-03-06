@@ -25,9 +25,24 @@ public class Game {
 				(heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
 				(heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()) ||
 				(heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
-			if(heroi.getName() == 'H')
+			if(heroi.getName() == 'H' && dragao.getName() != 'd')
 				return false;
 		return true;
+	}
+	
+	public static void Strategy(String index, dragon dragao, sword espada){
+		switch(index)
+		{
+		case "2":
+			dragao.randomPosition(espada);
+			break;
+		case "3":
+			dragao.randomSleep();
+			dragao.randomPosition(espada);
+			break;
+		default:
+			break;
+		}
 	}
 		
 	public static void main(String[] args) {
@@ -36,7 +51,12 @@ public class Game {
 		sword espada = new sword(8,1);
 		dragon dragao = new dragon(3,1);
 		
+		String index;
 		String direction;
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Selecione um modo de jogo:\n1 - Dragao parado;\n2 - Dragao com movimentacao aleatoria;\n3 - Dragao com posicao aleatoria intercalada com dormir;");
+		index = scan.nextLine();
 		
 		
 		while(true)
@@ -48,7 +68,7 @@ public class Game {
 			lab.printBoard();
 			
 			Scanner sc = new Scanner(System.in);
-			System.out.println("Faca um movimento(NSEO):");
+			System.out.println("Faca um movimento(N S E O):");
 			String s = sc.nextLine();
 			direction=s;
 			
@@ -74,7 +94,7 @@ public class Game {
 				break;
 			}
 			
-			dragao.randomPosition(espada);
+			Strategy(index, dragao, espada);
 			
 			if (check(heroi, dragao) == false){
 				Labirinto temp = new Labirinto();
