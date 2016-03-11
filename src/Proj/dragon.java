@@ -78,13 +78,10 @@ public class dragon extends character{
 	
 	public boolean checkmove(Labirinto lab, int x, int y) {
 		
-		boolean temp = true; 
-		
-		if (lab.getTable()[x][y]!='X')
-			temp = true;
+		if (lab.getTable()[x][y] != 'X')
+			return true;
 		else
-			temp = false;
-		return temp;
+			return false;
 	}
 	
 	public void moveDragon(int x, int y, sword espada){
@@ -93,7 +90,7 @@ public class dragon extends character{
 			pos_x = x;
 			pos_y = y;
 
-			if (x == 8 && y == 1 && espada.getState() == true)
+			if (x == espada.getPos_x() && y == espada.getPos_y() && espada.getState() == true)
 				tipo = 'F';
 			else
 				tipo = 'D';

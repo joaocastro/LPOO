@@ -126,4 +126,31 @@ public class test {
 		
 		assertEquals(false, g1.win(heroi, dragao, lab));
 	}
+	
+	@Test (timeout = 10000)
+	public void testSomeRandomBehaviour(){
+		boolean dragonsleeps = false, dragonwakesup = false, dragonmoves = false, dragoninsword = false;
+		
+		Labirinto lab = new Labirinto(m1, 5, 5);
+		hero heroi = new hero(1,1);
+		sword espada = new sword(2,3);
+		dragon dragao = new dragon(3,3);
+		
+		while(!dragonsleeps || !dragonwakesup || !dragonmoves || !dragoninsword){
+			dragao.randomSleep();
+			dragao.randomPosition(espada);
+			
+			if (dragao.getName() == 'd')
+				dragonsleeps = true;
+			
+			else if(dragao.getName() == 'D')
+				dragonwakesup = false;
+			
+			else if (dragao.getPos_x() != 3 || dragao.getPos_y() != 3)
+				dragonmoves = true;
+			
+			if (dragao.getName() == 'F')
+				dragoninsword = true;
+		}
+	}
 }
