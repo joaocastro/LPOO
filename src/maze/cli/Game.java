@@ -12,40 +12,7 @@ public class Game {
 	public Game(){		
 	}
 	
-	public static boolean win(hero heroi, dragon dragao){
-		if (heroi.getPos_x() == 5 && heroi.getPos_y() == 9 && dragao.getState() == false)
-			return true;
-		else
-			return false;
-	}
-	
-	public static boolean check(hero heroi, dragon dragao)
-	{
-		if(		(heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
-				(heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
-				(heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()) ||
-				(heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
-			if(heroi.getName() == 'H' && dragao.getName() != 'd')
-				return false;
-		return true;
-	}
-	
-	public static void Strategy(String index, dragon dragao, sword espada){
-		switch(index)
-		{
-		case "2":
-			dragao.randomPosition(espada);
-			break;
-		case "3":
-			dragao.randomSleep();
-			dragao.randomPosition(espada);
-			break;
-		default:
-			break;
-		}
-	}
-		
-	public static void main(String[] args) {
+	public void playGame(){
 		
 		hero heroi = new hero(1,1);
 		sword espada = new sword(8,1);
@@ -74,7 +41,7 @@ public class Game {
 			
 			heroi.moveHero(lab, direction, espada, dragao);
 			
-			if (win(heroi, dragao)){
+			if (win(heroi, dragao, lab)){
 				Labirinto temp2 = new Labirinto();
 				temp2.printDragon(dragao);
 				temp2.printHero(heroi);
@@ -107,6 +74,44 @@ public class Game {
 			}
 		}
 
+	}
+	
+	public static boolean win(hero heroi, dragon dragao, Labirinto lab){
+		if (heroi.getPos_x() == lab.getExit_xPos() && heroi.getPos_y() == lab.getExit_yPos() && dragao.getState() == false)
+			return true;
+		else
+			return false;
+	}
+	
+	public static boolean check(hero heroi, dragon dragao)
+	{
+		if(		(heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
+				(heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
+				(heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()) ||
+				(heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
+			if(heroi.getName() == 'H' && dragao.getName() != 'd')
+				return false;
+		return true;
+	}
+	
+	public static void Strategy(String index, dragon dragao, sword espada){
+		switch(index)
+		{
+		case "2":
+			dragao.randomPosition(espada);
+			break;
+		case "3":
+			dragao.randomSleep();
+			dragao.randomPosition(espada);
+			break;
+		default:
+			break;
+		}
+	}
+		
+	public static void main(String[] args) {
+		Game game1 = new Game();
+		game1.playGame();
 	}
 
 }
