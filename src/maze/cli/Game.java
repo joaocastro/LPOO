@@ -13,8 +13,6 @@ public class Game {
 	
 	protected Vector<dragon> dragons;
 	
-	private int ndrags;
-	
 	public Game(){
 	}
 	
@@ -26,7 +24,7 @@ public class Game {
 			if (d.pos_x == dragons.elementAt(i).pos_x && d.pos_y == dragons.elementAt(i).pos_y) {
 					temp = false;
 			}
-			else if (lab.getTable()[d.pos_x][d.pos_y] != ' ')
+			if (lab.getTable()[d.pos_x][d.pos_y] != ' ')
 				temp = false;
 			
 			else
