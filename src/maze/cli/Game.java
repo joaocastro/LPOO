@@ -4,21 +4,43 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Proj.Labirinto;
+import java.util.Vector;
 import Proj.hero;
 import Proj.sword;
 import Proj.dragon;
 
 public class Game {
 	
-	public Game(){		
+	protected Vector<dragon> dragons;
+	
+	private int ndrags;
+	
+	public Game(){
 	}
 	
+	public boolean isAvailable(dragon d, Labirinto lab) {
+
+		boolean temp = true;
+
+		for (int i = 0; i < dragons.size(); i++) {
+			if (d.pos_x == dragons.elementAt(i).pos_x && d.pos_y == dragons.elementAt(i).pos_y) {
+					temp = false;
+			}
+			else if (lab.getTable()[d.pos_x][d.pos_y] != ' ')
+				temp = false;
+			
+			else
+				temp = true;
+		}
+
+		return temp;
+	}
+
 	public void playGame(){
 		
+		Labirinto lab1 = new Labirinto();
 		hero heroi = new hero(1,1);
 		sword espada = new sword(8,1);
-		dragon dragao = new dragon(3,1);
-		dragao.addDragon(dragao);
 		
 		String index;
 		String direction;
@@ -27,7 +49,8 @@ public class Game {
 		Scanner scn = new Scanner(System.in);
 		System.out.println("Numero de Dragoes desejado");
 		numberdragons = scn.nextInt();
-					
+		
+		dragons = new Vector<dragon>(numberdragons);					
 		
 		for (; numberdragons>0; numberdragons--)
 		{
@@ -48,9 +71,9 @@ public class Game {
 			
 			dragon dragontemp= new dragon(rand,rand2);
 			
-			if(dragao.isAvailable(dragontemp)==true)
+			if(isAvailable(dragontemp, lab1)==true)
 			{
-				dragao.addDragon(dragontemp);
+				dragons.add(dragontemp);
 			}
 			
 			
@@ -67,9 +90,9 @@ public class Game {
 			Labirinto lab = new Labirinto();
 			lab.printHero(heroi);
 			lab.printSword(espada);
-			for (int i=0; i<dragao.getDragons().size(); i++)
+			for (int i=0; i<dragons.size(); i++)
 			{
-				lab.printDragon(dragao.getDragons().elementAt(i));
+				lab.printDragon(dragons.elementAt(i));
 			}
 			//lab.printDragon(dragao);
 			lab.printBoard();
@@ -79,11 +102,14 @@ public class Game {
 			String s = sc.nextLine();
 			direction=s;
 			
-			heroi.moveHero(lab, direction, espada, dragao);
+			heroi.moveHero(lab, direction, espada, dragons);
 			
-			if (win(heroi, dragao, lab)){
+			if (win(heroi, lab)){
 				Labirinto temp2 = new Labirinto();
-				temp2.printDragon(dragao);
+				for (int i=0; i<dragons.size(); i++)
+				{
+					lab.printDragon(dragons.elementAt(i));
+				}
 				temp2.printHero(heroi);
 				temp2.printSword(espada);
 				temp2.printBoard();
@@ -91,9 +117,12 @@ public class Game {
 				break;
 			}
 			
-			if (check(heroi, dragao) == false){
+			if (check(heroi) == false){
 				Labirinto temp = new Labirinto();
-				temp.printDragon(dragao);
+				for (int i=0; i<dragons.size(); i++)
+				{
+					lab.printDragon(dragons.elementAt(i));
+				}
 				temp.printHero(heroi);
 				temp.printSword(espada);
 				temp.printBoard();
@@ -101,11 +130,14 @@ public class Game {
 				break;
 			}
 			
-			Strategy(index, dragao, espada);
+			Strategy(index, espada);
 			
-			if (check(heroi, dragao) == false){
+			if (check(heroi) == false){
 				Labirinto temp = new Labirinto();
-				temp.printDragon(dragao);
+				for (int i=0; i<dragons.size(); i++)
+				{
+					lab.printDragon(dragons.elementAt(i));
+				}
 				temp.printHero(heroi);
 				temp.printSword(espada);
 				temp.printBoard();
@@ -116,33 +148,58 @@ public class Game {
 
 	}
 	
-	public static boolean win(hero heroi, dragon dragao, Labirinto lab){
-		if (heroi.getPos_x() == lab.getExit_xPos() && heroi.getPos_y() == lab.getExit_yPos() && dragao.getState() == false)
-			return true;
+	public boolean win(hero heroi, Labirinto lab){
+		boolean temp = true;
+		
+		if (heroi.getPos_x() == lab.getExit_xPos() && heroi.getPos_y() == lab.getExit_yPos())
+			temp = true;
 		else
 			return false;
+		
+		for (int i = 0; i< dragons.size(); i++)
+		{
+			dragon dragao = dragons.elementAt(i);
+			if (dragao.getState() == true)
+				temp = false;
+		}
+		
+		return temp;
 	}
 	
-	public static boolean check(hero heroi, dragon dragao)
+	public boolean check(hero heroi)
 	{
-		if(		(heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
-				(heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y()) ||
-				(heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()) ||
-				(heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
-			if(heroi.getName() == 'H' && dragao.getName() != 'd')
-				return false;
-		return true;
+		boolean temp = true;
+		
+		for (int i = 0; i < dragons.size(); i++) {
+			
+			dragon dragao = dragons.elementAt(i);
+			
+			if ((heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
+					|| (heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
+					|| (heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x())
+					|| (heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
+				if (heroi.getName() == 'H' && dragao.getName() != 'd')
+					temp = false;
+		}
+		
+		return temp;
 	}
 	
-	public static void Strategy(String index, dragon dragao, sword espada){
+	public void Strategy(String index, sword espada){
 		switch(index)
 		{
 		case "2":
-			dragao.randomPosition(espada);
+			for (int i = 0; i< dragons.size(); i++)
+			{
+				dragons.elementAt(i).randomPosition(espada);
+			}
 			break;
 		case "3":
-			dragao.randomSleep();
-			dragao.randomPosition(espada);
+			for (int i = 0; i< dragons.size(); i++)
+			{
+				dragons.elementAt(i).randomSleep();
+				dragons.elementAt(i).randomPosition(espada);
+			}
 			break;
 		default:
 			break;
@@ -154,4 +211,7 @@ public class Game {
 		game1.playGame();
 	}
 
+	public Vector<dragon> getDragons(){
+		return dragons;
+	}
 }

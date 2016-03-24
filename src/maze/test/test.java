@@ -19,6 +19,7 @@ public class test {
 
 	@Test
 	public void testMoveHerotoFreeCell_a() {
+		Game g1 = new Game();
 		Labirinto lab = new Labirinto(m1, 5, 5);
 		hero heroi = new hero(1,3);
 		sword espada = new sword(3,1);
@@ -27,7 +28,7 @@ public class test {
 		assertEquals(1, heroi.getPos_x());
 		assertEquals(3, heroi.getPos_y());
 		
-		heroi.moveHero(lab, "O", espada, dragao);
+		heroi.moveHero(lab, "O", espada, g1.getDragons());
 		
 		assertEquals(1, heroi.getPos_x());
 		assertEquals(2, heroi.getPos_y());
@@ -35,6 +36,7 @@ public class test {
 	
 	@Test
 	public void testMoveHeroAgainstWall_b(){
+		Game g1 = new Game();
 		Labirinto lab = new Labirinto(m1, 5, 5);
 		hero heroi = new hero(1,3);
 		sword espada = new sword(3,1);
@@ -43,7 +45,7 @@ public class test {
 		assertEquals(1, heroi.getPos_x());
 		assertEquals(3, heroi.getPos_y());
 		
-		heroi.moveHero(lab, "N", espada, dragao);
+		heroi.moveHero(lab, "N", espada, g1.getDragons());
 		
 		assertEquals(1, heroi.getPos_x());
 		assertEquals(3, heroi.getPos_y());
@@ -51,6 +53,7 @@ public class test {
 
 	@Test
 	public void testHerogetsSword_c(){
+		Game g1 = new Game();
 		Labirinto lab = new Labirinto(m1, 5, 5);
 		hero heroi = new hero(1,3);
 		sword espada = new sword(1,2);
@@ -58,7 +61,7 @@ public class test {
 		
 		lab.printSword(espada);
 		
-		heroi.moveHero(lab, "O", espada, dragao);
+		heroi.moveHero(lab, "O", espada, g1.getDragons());
 		
 		assertEquals('A', heroi.getName());
 	}
@@ -74,13 +77,14 @@ public class test {
 		lab.printDragon(dragao);
 		lab.printHero(heroi);
 		
-		heroi.moveHero(lab, "S", espada, dragao);
+		heroi.moveHero(lab, "S", espada, g1.getDragons());
 		
-		assertEquals(false, g1.check(heroi, dragao));
+		assertEquals(false, g1.check(heroi));
 	}
 	
 	@Test
 	public void testHeroKillsDragon_e(){
+		Game g1 = new Game();
 		Labirinto lab = new Labirinto(m1, 5, 5);
 		hero heroi = new hero(1,3);
 		sword espada = new sword(1,2);
@@ -91,7 +95,7 @@ public class test {
 		
 		heroi.equipHero();
 		
-		heroi.moveHero(lab, "S", espada, dragao);
+		heroi.moveHero(lab, "S", espada, g1.getDragons());
 		
 		assertEquals(false, dragao.isAlive());
 	}
@@ -107,9 +111,9 @@ public class test {
 		heroi.equipHero();
 		dragao.changeState();
 		
-		heroi.moveHero(lab, "E", espada, dragao);
+		heroi.moveHero(lab, "E", espada, g1.getDragons());
 		
-		assertEquals(true, g1.win(heroi, dragao, lab));
+		assertEquals(true, g1.win(heroi, lab));
 	}
 	
 	@Test
@@ -122,9 +126,9 @@ public class test {
 		
 		heroi.equipHero();
 		
-		heroi.moveHero(lab, "E", espada, dragao);
+		heroi.moveHero(lab, "E", espada, g1.getDragons());
 		
-		assertEquals(false, g1.win(heroi, dragao, lab));
+		assertEquals(false, g1.win(heroi, lab));
 	}
 	
 	/*@Test (timeout = 10000)

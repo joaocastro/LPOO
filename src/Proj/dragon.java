@@ -1,7 +1,6 @@
 package Proj;
 
 import java.util.Random;
-import java.util.Vector;
 import java.lang.Character;
 
 public class dragon extends character{
@@ -9,15 +8,12 @@ public class dragon extends character{
 	private boolean state = true;
 	private char tipo;
 	private boolean sleep;
-	private Vector<dragon> dragons;
 	
 	public dragon(int x, int y){
 		pos_x = x;
 		pos_y = y;
 		tipo='D';
 		sleep = false;
-		dragons = new Vector<dragon>();
-		//dragons.add(this);
 	}
 	
 	public boolean isAlive() {
@@ -82,7 +78,7 @@ public class dragon extends character{
 	
 	public boolean checkmove(Labirinto lab, int x, int y) {
 		
-		if (lab.getTable()[x][y] != 'X')
+		if (lab.getTable()[x][y] != 'X' && lab.getTable()[x][y] != 'S')
 			return true;
 		else
 			return false;
@@ -119,35 +115,5 @@ public class dragon extends character{
 			Sleep();
 		else
 			WakeUp();
-	}
-	
-	public Vector<dragon> getDragons(){
-		
-		return dragons;
-	}
-	
-	public boolean isAvailable(dragon d){
-		
-		boolean temp=true;
-		
-		for (int i=0; i<dragons.size(); i++)
-		{
-			if (d.pos_x==dragons.elementAt(i).pos_x)
-			{
-				if (d.pos_y==dragons.elementAt(i).pos_y)
-					temp=false;
-				else
-					temp=true;
-			}
-			else
-				temp=true;
-		}
-		
-		return temp;
-	}
-	
-	public void addDragon(dragon d){
-		
-		dragons.add(d);
 	}
 }

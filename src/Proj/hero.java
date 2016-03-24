@@ -1,5 +1,7 @@
 package Proj;
 
+import java.util.Vector;
+
 public class hero extends character{
 
 	private char tipo;
@@ -31,7 +33,7 @@ public class hero extends character{
 		return state;
 	}
 	
-	public void moveHero(Labirinto lab, String direction, sword espada, dragon dragao) {
+	public void moveHero(Labirinto lab, String direction, sword espada, Vector<dragon> dragons) {
 		
 		
 		switch(direction)
@@ -54,7 +56,7 @@ public class hero extends character{
 					pos_x--;
 				equipHero();
 				espada.changeState();
-				dragao.changeState();
+				findDragon(dragons, pos_x -1, pos_y).changeState();
 				}
 			}
 			break;
@@ -76,7 +78,7 @@ public class hero extends character{
 					pos_x++;
 				equipHero();
 				espada.changeState();
-				dragao.changeState();
+				findDragon(dragons, pos_x + 1, pos_y).changeState();
 				}
 			}
 			break;
@@ -98,7 +100,7 @@ public class hero extends character{
 					pos_y++;
 				equipHero();
 				espada.changeState();
-				dragao.changeState();
+				findDragon(dragons, pos_x, pos_y + 1).changeState();
 				}
 			}
 			else if (lab.getTable()[pos_x][pos_y + 1] == 'S' && tipo == 'A')
@@ -124,11 +126,22 @@ public class hero extends character{
 					pos_y--;
 				equipHero();
 				espada.changeState();
-				dragao.changeState();
+				findDragon(dragons, pos_x, pos_y - 1).changeState();
 				}
 			}
 			break;
 		}
+	}
+	
+	public dragon findDragon(Vector<dragon> dragons, int x, int y){
+		for (int i = 0; i< dragons.size(); i++){
+			if (dragons.elementAt(i).pos_x == x && dragons.elementAt(i).pos_y == y)
+				return dragons.elementAt(i);
+		}
+		
+		dragon d1 = new dragon(1000,1000);
+		
+		return d1;
 	}
 
 }
