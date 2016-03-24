@@ -139,18 +139,31 @@ public class test {
 		while(!dragonsleeps || !dragonwakesup || !dragonmoves || !dragoninsword){
 			dragao.randomSleep();
 			dragao.randomPosition(espada);
+			lab.printDragon(dragao);
 			
 			if (dragao.getName() == 'd')
+			{
 				dragonsleeps = true;
+				assertEquals(true, dragonsleeps);
+			}
 			
 			else if(dragao.getName() == 'D')
+			{
 				dragonwakesup = false;
+				assertEquals(false, dragonwakesup);
+			}
 			
 			else if (dragao.getPos_x() != 3 || dragao.getPos_y() != 3)
+			{
 				dragonmoves = true;
+				assertEquals(true, dragonmoves);
+			}
 			
 			if (dragao.getName() == 'F')
+			{
 				dragoninsword = true;
+				assertEquals(true, dragoninsword);
+			}
 		}
 	}*/
 }

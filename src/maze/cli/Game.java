@@ -1,5 +1,6 @@
 package maze.cli;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import Proj.Labirinto;
@@ -17,9 +18,44 @@ public class Game {
 		hero heroi = new hero(1,1);
 		sword espada = new sword(8,1);
 		dragon dragao = new dragon(3,1);
+		dragao.addDragon(dragao);
 		
 		String index;
 		String direction;
+		int numberdragons;
+		
+		Scanner scn = new Scanner(System.in);
+		System.out.println("Numero de Dragoes desejado");
+		numberdragons = scn.nextInt();
+					
+		
+		for (; numberdragons>0; numberdragons--)
+		{
+			Random rn = new Random();
+			int rand, rand2;
+			rand = rn.nextInt(10);
+			rand2 = rn.nextInt(10);
+			
+			if (rand==0)
+				rand++;
+			else if (rand==9)
+				rand--;
+			
+			if (rand2==0)
+				rand2++;
+			else if (rand2==9)
+				rand2--;		
+			
+			dragon dragontemp= new dragon(rand,rand2);
+			
+			if(dragao.isAvailable(dragontemp)==true)
+			{
+				dragao.addDragon(dragontemp);
+			}
+			
+			
+		}
+		
 		
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Selecione um modo de jogo:\n1 - Dragao parado;\n2 - Dragao com movimentacao aleatoria;\n3 - Dragao com posicao aleatoria intercalada com dormir;");
@@ -31,7 +67,11 @@ public class Game {
 			Labirinto lab = new Labirinto();
 			lab.printHero(heroi);
 			lab.printSword(espada);
-			lab.printDragon(dragao);
+			for (int i=0; i<dragao.getDragons().size(); i++)
+			{
+				lab.printDragon(dragao.getDragons().elementAt(i));
+			}
+			//lab.printDragon(dragao);
 			lab.printBoard();
 			
 			Scanner sc = new Scanner(System.in);
