@@ -127,7 +127,7 @@ public class test {
 		assertEquals(false, g1.win(heroi, dragao, lab));
 	}
 	
-	@Test (timeout = 10000)
+	/*@Test (timeout = 10000)
 	public void testSomeRandomBehaviour(){
 		boolean dragonsleeps = false, dragonwakesup = false, dragonmoves = false, dragoninsword = false;
 		
@@ -152,5 +152,5 @@ public class test {
 			if (dragao.getName() == 'F')
 				dragoninsword = true;
 		}
-	}
+	}*/
 }
