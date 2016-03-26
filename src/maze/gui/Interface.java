@@ -13,12 +13,20 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
+import Proj.Labirinto;
+import java.util.Vector;
+import Proj.hero;
+import Proj.sword;
+import Proj.dragon;
+
+import maze.cli.Game;
+
 public class Interface {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField textField_2;
+	private JTextField Labirinto;
 
 	/**
 	 * Launch the application.
@@ -99,12 +107,6 @@ public class Interface {
 		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
 		
-		textField_2 = new JTextField();
-		textField_2.setEnabled(false);
-		textField_2.setEditable(false);
-		textField_2.setBounds(10, 114, 217, 137);
-		frame.getContentPane().add(textField_2);
-		textField_2.setColumns(10);
 		
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
@@ -150,5 +152,22 @@ public class Interface {
 		
 		btnNewButton.setBounds(293, 11, 131, 36);
 		frame.getContentPane().add(btnNewButton);
+		
+		Labirinto = new JTextField();
+		Labirinto.setEnabled(false);
+		Labirinto.setEditable(false);
+		Labirinto.setBounds(10, 114, 217, 137);
+		frame.getContentPane().add(Labirinto);
+		Labirinto.setColumns(10);
+			//Game game = new Game();
+			//game.playGame();
+		Labirinto.setEnabled(true);
+			Labirinto lab = new Labirinto();
+			Labirinto.setText(lab.getTable().toString());
+
+		
+		
 	}
+	
+		
 }

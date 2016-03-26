@@ -9,6 +9,8 @@ import Proj.hero;
 import Proj.sword;
 import Proj.dragon;
 
+import maze.gui.Interface;
+
 public class Game {
 	
 	protected Vector<dragon> dragons;
