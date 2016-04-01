@@ -1,11 +1,13 @@
 package Proj;
 
+import java.util.ArrayList;
+
 public class Labirinto extends character{
 	
 	private int lines;
 	private int columns;
 	private char table[][];
-	char m1[][] = new char[][] {
+	private char m1[][] = new char[][] {
 	{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'},
 	{'X',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', 'X'},
 	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
@@ -96,19 +98,6 @@ public class Labirinto extends character{
 
 	@Override
 	public String toString() {
-		/*
-		StringBuilder builder = new StringBuilder();
-	    for(int i = 0; i < lines; i++)
-	    {
-	        for(int j = 0; j < columns; j++)
-	        {
-	            builder.append(table[i][j]);
-	            builder.append("\n");
-	        }
-	        builder.append("\n");
-	    }    
-	    return builder.toString();
-	    */
 		
 		String builder = new String();
 	    for(int i = 0; i < lines; i++)
@@ -129,5 +118,9 @@ public class Labirinto extends character{
 	
 	public int getColumns(){
 		return columns;
+	}
+	
+	public void setTable(char[][] tab){
+		table = tab;
 	}
 }

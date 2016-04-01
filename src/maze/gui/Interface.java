@@ -84,11 +84,22 @@ public class Interface {
 		lblNewLabel.setBounds(159, 14, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
 		
+		Game g1 = new Game();
+		
+		g1.updateBoard();
+		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_1.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				g1.createDragons(Integer.parseInt(textField_1.getText()));
+			}
+		});
 		textField_1.setBounds(137, 45, 106, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
+		
+		g1.updateBoard();
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(159, 48, 46, 14);
@@ -109,11 +120,19 @@ public class Interface {
 		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
 		
-		
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
 		Cima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				g1.updateBoard();
+				g1.makePlay("N");
+				g1.updateBoard();
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				if(g1.win())
+					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
 			}
 		});
 		Cima.setBounds(293, 114, 90, 40);
@@ -123,6 +142,15 @@ public class Interface {
 		Esquerda.setEnabled(false);
 		Esquerda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				g1.updateBoard();
+				g1.makePlay("O");
+				g1.updateBoard();
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				if(g1.win())
+					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
 			}
 		});
 		Esquerda.setBounds(237, 157, 90, 40);
@@ -130,11 +158,37 @@ public class Interface {
 		
 		JButton Direita = new JButton("Direita");
 		Direita.setEnabled(false);
+		Direita.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				g1.updateBoard();
+				g1.makePlay("E");
+				g1.updateBoard();
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				if(g1.win())
+					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
+			}
+		});
 		Direita.setBounds(335, 157, 90, 40);
 		frame.getContentPane().add(Direita);
 		
 		JButton Baixo = new JButton("Baixo");
 		Baixo.setEnabled(false);
+		Baixo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e){
+				g1.updateBoard();
+				g1.makePlay("S");
+				g1.updateBoard();
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				if(g1.win())
+					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
+			}
+		});
 		Baixo.setBounds(293, 199, 90, 40);
 		frame.getContentPane().add(Baixo);
 		
@@ -158,7 +212,6 @@ public class Interface {
 			//Game game = new Game();
 			//game.playGame();
 		Labirinto.setEnabled(true);
-			Labirinto lab = new Labirinto();
 			
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -166,7 +219,7 @@ public class Interface {
 					Baixo.setEnabled(true);
 					Direita.setEnabled(true);
 					Esquerda.setEnabled(true);
-					Labirinto.setText(lab.toString());
+					Labirinto.setText(g1.getMaze().toString());
 				}
 			});
 		

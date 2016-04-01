@@ -34,7 +34,7 @@ public class hero extends character{
 	}
 	
 	public void moveHero(Labirinto lab, String direction, sword espada, ArrayList<dragon> dragons) {
-		
+		lab.getTable()[pos_x][pos_y] = ' ';
 		switch(direction)
 		{
 		case "n":
