@@ -96,17 +96,38 @@ public class Labirinto extends character{
 
 	@Override
 	public String toString() {
-		
+		/*
 		StringBuilder builder = new StringBuilder();
 	    for(int i = 0; i < lines; i++)
 	    {
 	        for(int j = 0; j < columns; j++)
 	        {
 	            builder.append(table[i][j]);
+	            builder.append("\n");
 	        }
+	        builder.append("\n");
 	    }    
 	    return builder.toString();
+	    */
+		
+		String builder = new String();
+	    for(int i = 0; i < lines; i++)
+	    {
+	        for(int j = 0; j < columns; j++)
+	        {
+	            builder+=(table[i][j]);
+	            
+	        }
+	        builder+="\n";
+	    }    
+	    return builder;
 	}
 	
+	public int getLines(){
+		return lines;
+	}
 	
+	public int getColumns(){
+		return columns;
+	}
 }

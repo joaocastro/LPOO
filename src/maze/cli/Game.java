@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 import Proj.Labirinto;
-import java.util.Vector;
+import java.util.ArrayList;
 import Proj.hero;
 import Proj.sword;
 import Proj.dragon;
@@ -13,25 +13,25 @@ import maze.gui.Interface;
 
 public class Game {
 	
-	protected Vector<dragon> dragons;
+	protected ArrayList<dragon> dragons;
 	
 	public Game(){
 	}
 	
 	public boolean isAvailable(dragon d, Labirinto lab) {
 
-		boolean temp = true;
+		boolean temp;
 
 		for (int i = 0; i < dragons.size(); i++) {
-			if (d.pos_x == dragons.elementAt(i).pos_x && d.pos_y == dragons.elementAt(i).pos_y) {
-					temp = false;
-			}
-			if (lab.getTable()[d.pos_x][d.pos_y] != ' ')
-				temp = false;
-			
-			else
-				temp = true;
+			if (d.getPos_x() == dragons.get(i).getPos_x() && d.getPos_y() == dragons.get(i).getPos_y())
+					return false;
 		}
+		
+		if (lab.getTable()[d.getPos_x()][d.getPos_y()] == ' ')
+			temp = true;
+		
+		else
+			temp = false;
 
 		return temp;
 	}
@@ -41,6 +41,8 @@ public class Game {
 		Labirinto lab1 = new Labirinto();
 		hero heroi = new hero(1,1);
 		sword espada = new sword(8,1);
+		lab1.printHero(heroi);
+		lab1.printSword(espada);
 		
 		String index;
 		String direction;
@@ -50,9 +52,9 @@ public class Game {
 		System.out.println("Numero de Dragoes desejado");
 		numberdragons = scn.nextInt();
 		
-		dragons = new Vector<dragon>(numberdragons);					
+		dragons = new ArrayList<dragon>();					
 		
-		for (; numberdragons>0; numberdragons--)
+		while (numberdragons>0)
 		{
 			Random rn = new Random();
 			int rand, rand2;
@@ -74,9 +76,9 @@ public class Game {
 			if(isAvailable(dragontemp, lab1)==true)
 			{
 				dragons.add(dragontemp);
+				lab1.printDragon(dragontemp);
+				numberdragons--;
 			}
-			
-			
 		}
 		
 		
@@ -92,7 +94,7 @@ public class Game {
 			lab.printSword(espada);
 			for (int i=0; i<dragons.size(); i++)
 			{
-				lab.printDragon(dragons.elementAt(i));
+				lab.printDragon(dragons.get(i));
 			}
 			//lab.printDragon(dragao);
 			lab.printBoard();
@@ -108,7 +110,7 @@ public class Game {
 				Labirinto temp2 = new Labirinto();
 				for (int i=0; i<dragons.size(); i++)
 				{
-					lab.printDragon(dragons.elementAt(i));
+					lab.printDragon(dragons.get(i));
 				}
 				temp2.printHero(heroi);
 				temp2.printSword(espada);
@@ -121,7 +123,7 @@ public class Game {
 				Labirinto temp = new Labirinto();
 				for (int i=0; i<dragons.size(); i++)
 				{
-					lab.printDragon(dragons.elementAt(i));
+					lab.printDragon(dragons.get(i));
 				}
 				temp.printHero(heroi);
 				temp.printSword(espada);
@@ -136,7 +138,7 @@ public class Game {
 				Labirinto temp = new Labirinto();
 				for (int i=0; i<dragons.size(); i++)
 				{
-					lab.printDragon(dragons.elementAt(i));
+					lab.printDragon(dragons.get(i));
 				}
 				temp.printHero(heroi);
 				temp.printSword(espada);
@@ -158,7 +160,7 @@ public class Game {
 		
 		for (int i = 0; i< dragons.size(); i++)
 		{
-			dragon dragao = dragons.elementAt(i);
+			dragon dragao = dragons.get(i);
 			if (dragao.getState() == true)
 				temp = false;
 		}
@@ -172,7 +174,7 @@ public class Game {
 		
 		for (int i = 0; i < dragons.size(); i++) {
 			
-			dragon dragao = dragons.elementAt(i);
+			dragon dragao = dragons.get(i);
 			
 			if ((heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
 					|| (heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
@@ -191,14 +193,14 @@ public class Game {
 		case "2":
 			for (int i = 0; i< dragons.size(); i++)
 			{
-				dragons.elementAt(i).randomPosition(espada);
+				dragons.get(i).randomPosition(espada);
 			}
 			break;
 		case "3":
 			for (int i = 0; i< dragons.size(); i++)
 			{
-				dragons.elementAt(i).randomSleep();
-				dragons.elementAt(i).randomPosition(espada);
+				dragons.get(i).randomSleep();
+				dragons.get(i).randomPosition(espada);
 			}
 			break;
 		default:
@@ -211,7 +213,7 @@ public class Game {
 		game1.playGame();
 	}
 
-	public Vector<dragon> getDragons(){
+	public ArrayList<dragon> getDragons(){
 		return dragons;
 	}
 }

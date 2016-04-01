@@ -14,19 +14,21 @@ import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
 import Proj.Labirinto;
-import java.util.Vector;
 import Proj.hero;
 import Proj.sword;
 import Proj.dragon;
 
 import maze.cli.Game;
+import java.awt.Component;
+import java.awt.Font;
+import javax.swing.DropMode;
 
 public class Interface {
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
-	private JTextField Labirinto;
+	private JTextArea Labirinto;
 
 	/**
 	 * Launch the application.
@@ -141,20 +143,14 @@ public class Interface {
 		frame.getContentPane().add(lblTipoDeDrages);
 		
 		JButton btnNewButton = new JButton("Gerar Novo Labirinto");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Cima.setEnabled(true);
-				Baixo.setEnabled(true);
-				Direita.setEnabled(true);
-				Esquerda.setEnabled(true);
-			}
-		});
 		
 		btnNewButton.setBounds(293, 11, 131, 36);
 		frame.getContentPane().add(btnNewButton);
 		
-		Labirinto = new JTextField();
-		Labirinto.setEnabled(false);
+		Labirinto = new JTextArea();
+		Labirinto.setFont(new Font("Courier New", Font.PLAIN, 11));
+		Labirinto.setAlignmentY(Component.TOP_ALIGNMENT);
+		Labirinto.setAlignmentX(Component.LEFT_ALIGNMENT);
 		Labirinto.setEditable(false);
 		Labirinto.setBounds(10, 114, 217, 137);
 		frame.getContentPane().add(Labirinto);
@@ -163,8 +159,16 @@ public class Interface {
 			//game.playGame();
 		Labirinto.setEnabled(true);
 			Labirinto lab = new Labirinto();
-			Labirinto.setText(lab.getTable().toString());
-
+			
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					Cima.setEnabled(true);
+					Baixo.setEnabled(true);
+					Direita.setEnabled(true);
+					Esquerda.setEnabled(true);
+					Labirinto.setText(lab.toString());
+				}
+			});
 		
 		
 	}
