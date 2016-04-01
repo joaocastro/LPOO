@@ -129,7 +129,7 @@ public class Interface {
 				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
-				if(g1.win())
+				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
@@ -147,7 +147,7 @@ public class Interface {
 				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
-				if(g1.win())
+				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
@@ -165,7 +165,7 @@ public class Interface {
 				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
-				if(g1.win())
+				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
@@ -183,7 +183,7 @@ public class Interface {
 				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
-				if(g1.win())
+				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());

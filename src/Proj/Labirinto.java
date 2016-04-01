@@ -6,6 +6,8 @@ public class Labirinto extends character{
 	
 	private int lines;
 	private int columns;
+	private int exit_x;
+	private int exit_y;
 	private char table[][];
 	private char m1[][] = new char[][] {
 	{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'},
@@ -30,6 +32,18 @@ public class Labirinto extends character{
 		table = m1;
 		lines = 10;
 		columns = 10;
+		
+		for (int i=0; i<lines; i++)
+		{
+			for(int j=0; j<columns; j++)
+			{
+				if(table[i][j] == 'S'){
+					exit_x = i;
+					exit_y = j;
+					break;
+				}
+			}
+		}
 	}
 	
 	public char[][] getTable(){
@@ -65,35 +79,11 @@ public class Labirinto extends character{
 	}
 	
 	public int getExit_xPos(){
-		int ret= -1;
-		for (int i=0; i<lines; i++)
-		{
-			for(int j=0; j<columns; j++)
-			{
-				if(table[i][j] == 'S'){
-					ret = i;
-					break;
-				}
-			}
-		}
-		
-		return ret;
+		return exit_x;
 	}
 	
 	public int getExit_yPos(){
-		int ret = -1;
-		for (int i=0; i<lines; i++)
-		{
-			for(int j=0; j<columns; j++)
-			{
-				if(table[i][j] == 'S'){
-					ret = j;
-					break;
-				}
-			}
-		}
-		
-		return ret;
+		return exit_y;
 	}
 
 	@Override

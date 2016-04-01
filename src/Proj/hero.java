@@ -100,7 +100,13 @@ public class hero extends character{
 			}
 			else if (lab.getTable()[pos_x][pos_y + 1] == 'S' && tipo == 'A')
 			{
-				pos_y++;
+				boolean dead = true;
+				for(int i = 0;i < dragons.size(); i++){
+					if (dragons.get(i).getState() == true)
+						dead = false;
+				}
+				if (dead)
+					pos_y++;
 			}
 			break;
 		case "o":

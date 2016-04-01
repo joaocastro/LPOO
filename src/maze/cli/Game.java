@@ -29,7 +29,7 @@ public class Game {
 	{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'}
 	};
 	
-	protected ArrayList<dragon> dragons;
+	private ArrayList<dragon> dragons;
 	
 	public Game(){
 		heroi = new hero(1,1);
@@ -185,22 +185,11 @@ public class Game {
 		maze.printSword(espada);
 	}
 	
-	public boolean win(){
-		boolean temp = true;
-		
+	public boolean win(){		
 		if (heroi.getPos_x() == maze.getExit_xPos() && heroi.getPos_y() == maze.getExit_yPos())
-			temp = true;
+			return true;
 		else
 			return false;
-		
-		for (int i = 0; i< dragons.size(); i++)
-		{
-			dragon dragao = dragons.get(i);
-			if (dragao.getState() == true)
-				temp = false;
-		}
-		
-		return temp;
 	}
 	
 	public boolean win(hero heroi, Labirinto lab){
