@@ -58,12 +58,12 @@ public class Game {
 	public void addMaze(int size){
 		MazeBuilder m = new MazeBuilder(size);
 		
-		genHero();
-		genSword();
-		
 		maze = m.buildMaze();
 		m1 = m.getMaze();
+		genHero();
+		genSword();
 		dragons = new ArrayList<dragon>();
+		updateBoard();
 	}
 	
 	
