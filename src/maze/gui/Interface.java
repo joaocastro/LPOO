@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
@@ -21,6 +22,8 @@ import Proj.dragon;
 import maze.cli.Game;
 import java.awt.Component;
 import java.awt.Font;
+import maze.gui.GraphicsPanel;
+
 import javax.swing.DropMode;
 
 public class Interface {
@@ -57,11 +60,15 @@ public class Interface {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
-		
+		JPanel panel = new GraphicsPanel();
+		frame.getContentPane().add(panel);
+		frame.pack();
+		frame.setVisible(true);
+		panel.requestFocus();
 		
 		
 		JButton btnNewButton_13 = new JButton("Terminar programa");
