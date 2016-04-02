@@ -63,12 +63,13 @@ public class Interface {
 	private void initialize() {
 
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 132, 129);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(null);
 		JPanel panel = new GraphicsPanel();
+		panel.setBounds(20, 20, 700, 700);
 		frame.getContentPane().add(panel);
 		frame.pack();
-		frame.setVisible(true);
 		panel.requestFocus();
 		
 		
@@ -82,8 +83,16 @@ public class Interface {
 		btnNewButton_13.setBounds(293, 58, 131, 36);
 		frame.getContentPane().add(btnNewButton_13);
 		
+		Game g1 = new Game();
+	
+		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
+		textField.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				g1.addMaze(Integer.parseInt(textField.getText()));
+			}
+		});
 		textField.setBounds(137, 11, 106, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
@@ -91,11 +100,6 @@ public class Interface {
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(159, 14, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
-		
-		Game g1 = new Game();
-		MazeBuilder m1 = new MazeBuilder(11);
-		
-		g1.updateBoard(m1.getMaze());
 		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -108,8 +112,6 @@ public class Interface {
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		g1.updateBoard(m1.getMaze());
-		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(159, 48, 46, 14);
 		frame.getContentPane().add(lblNewLabel_1);
@@ -120,6 +122,24 @@ public class Interface {
 		comboBox.addItem("Móveis");
 		comboBox.addItem("Móveis com sono");
 		frame.getContentPane().add(comboBox);
+		JLabel lblTipoDeDrages = new JLabel("Tipo de drag\u00F5es");
+		lblTipoDeDrages.setBounds(10, 80, 95, 14);
+		frame.getContentPane().add(lblTipoDeDrages);
+		
+		String s = lblTipoDeDrages.getText();
+		String strat  = "";
+		
+		switch(s){
+		case "Estáticos":
+			strat = "1";
+			break;
+		case "Móveis":
+			strat = "2";
+			break;
+		case "Móveis com sono":
+			strat = "3";
+			break;	
+		}
 		
 		JLabel lblDimensoDoLabirinto = new JLabel("Dimens\u00E3o do Labirinto");
 		lblDimensoDoLabirinto.setBounds(10, 14, 117, 14);
@@ -129,19 +149,29 @@ public class Interface {
 		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
 		
+		
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
 		Cima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				g1.makePlay("N");
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+				g1.Strategy(s);
+				g1.updateBoard();
+				
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
+				
 			}
 		});
 		Cima.setBounds(293, 114, 90, 40);
@@ -151,13 +181,21 @@ public class Interface {
 		Esquerda.setEnabled(false);
 		Esquerda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				g1.makePlay("O");
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
+				
+				g1.Strategy(s);
+				g1.updateBoard();
+				
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
 			}
@@ -169,13 +207,21 @@ public class Interface {
 		Direita.setEnabled(false);
 		Direita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				g1.makePlay("E");
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
+				
+				g1.Strategy(s);
+				g1.updateBoard();
+				
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
 			}
@@ -187,23 +233,27 @@ public class Interface {
 		Baixo.setEnabled(false);
 		Baixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				g1.makePlay("S");
-				g1.updateBoard(m1.getMaze());
+				g1.updateBoard();
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+				g1.Strategy(s);
+				g1.updateBoard();
+				
+				if(!g1.check())
+					Labirinto.setText("Perdeu o jogo!");
+				else
+					Labirinto.setText(g1.getMaze().toString());
 			}
 		});
 		Baixo.setBounds(293, 199, 90, 40);
-		frame.getContentPane().add(Baixo);
-		
-		JLabel lblTipoDeDrages = new JLabel("Tipo de drag\u00F5es");
-		lblTipoDeDrages.setBounds(10, 80, 95, 14);
-		frame.getContentPane().add(lblTipoDeDrages);
+		frame.getContentPane().add(Baixo);		
 		
 		JButton btnNewButton = new JButton("Gerar Novo Labirinto");
 		
@@ -215,7 +265,7 @@ public class Interface {
 		Labirinto.setAlignmentY(Component.TOP_ALIGNMENT);
 		Labirinto.setAlignmentX(Component.LEFT_ALIGNMENT);
 		Labirinto.setEditable(false);
-		Labirinto.setBounds(10, 114, 217, 137);
+		Labirinto.setBounds(11, 126, 218, 176);
 		frame.getContentPane().add(Labirinto);
 		Labirinto.setColumns(10);
 			//Game game = new Game();

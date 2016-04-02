@@ -25,15 +25,29 @@ public class Labirinto extends character{
 	};
 	
 	public Labirinto(char maze[][], int nlin, int ncol){
+		table = new char[][]{};
 		table = maze;
 		lines = nlin;
 		columns = ncol;
+		
+		for (int i=0; i<lines; i++)
+		{
+			for(int j=0; j<columns; j++)
+			{
+				if(table[i][j] == 'S'){
+					exit_x = i;
+					exit_y = j;
+					break;
+				}
+			}
+		}
 	}
 	
 	public Labirinto(){
+		table = new char[][]{};
 		table = m1;
-		lines = 10;
-		columns = 10;
+		lines = table[0].length;
+		columns = table[0].length;
 		
 		for (int i=0; i<lines; i++)
 		{

@@ -17,8 +17,7 @@ public class MazeBuilder {
 		size = siz;
 	}
 	
-	public void buildMaze(){
-		lab = new Labirinto();
+	public Labirinto buildMaze(){
 		maze = new char[size][size];
 		
 		for (int i = 0; i<size; i++){
@@ -50,7 +49,7 @@ public class MazeBuilder {
 		
 		side = rand.nextInt(4);
 		
-		guideCell = new Point();
+		guideCell = new Point(1,1);
 		
 		switch (side){
 		case 0: // saida na esquerda
@@ -59,7 +58,7 @@ public class MazeBuilder {
 			break;
 		case 1: // saida na direita
 			maze[size - 1][exit_y] = 'S';
-			guideCell = new Point(((size - 2) - 1) / 2, (exit_y - 1) / 2);
+			guideCell = new Point((size - 2) / 2, (exit_y - 1) / 2);
 			break;
 		case 2: // saida em cima
 			maze[exit_x][0] = 'S';
@@ -67,7 +66,7 @@ public class MazeBuilder {
 			break;
 		case 3: // saida em baixo
 			maze[exit_x][size - 1] = 'S';
-			guideCell = new Point((exit_x - 1) / 2, ((size - 2) - 1) / 2);
+			guideCell = new Point((exit_x - 1) / 2, (size - 2) / 2);
 			break;
 		}
 		
@@ -80,6 +79,9 @@ public class MazeBuilder {
 		}
 		
 		visitedCells[guideCell.x][guideCell.y] = true;
+		
+		pathHistory = new Stack<Point>();
+		
 		pathHistory.push(guideCell);
 		
 		while(!pathHistory.empty()){
@@ -92,11 +94,14 @@ public class MazeBuilder {
 					guideCell = pathHistory.peek();
 			}
 			
+			if (pathHistory.empty())
+				break;
+			
 			int dir;
 			
 			do {
 				dir = rand.nextInt(4);
-;			} while (!guideCellCanGoSomewhere());
+;			} while (!canMove(dir));
 			
 			switch(dir){
 			case 0://esquerda
@@ -118,21 +123,25 @@ public class MazeBuilder {
 			pathHistory.push(guideCell);
 		}
 		
+		return new Labirinto(maze, size, size);
+		
 	}
 	
 	public void moveGuideCell(int dir){
+		int x = guideCell.x;
+		int y = guideCell.y;
 		switch(dir){
 		case 0: //esquerda
-			guideCell.setLocation(guideCell.x - 1, guideCell.y);
+			guideCell = new Point(x-1,y);
 			break;
 		case 1: //direita
-			guideCell.setLocation(guideCell.x + 1, guideCell.y);
+			guideCell = new Point(x+1,y);;
 			break;
 		case 2: //cima
-			guideCell.setLocation(guideCell.x, guideCell.y - 1);
+			guideCell = new Point(x,y - 1);
 			break;
 		case 3: //baixo
-			guideCell.setLocation(guideCell.x, guideCell.y + 1);
+			guideCell = new Point(x,y + 1);
 			break;
 		}
 	}
@@ -140,19 +149,23 @@ public class MazeBuilder {
 	public boolean canMove(int dir){
 		switch(dir){
 		case 0: //esquerda
-			if (guideCell.x - 1 >=0)
+			if (guideCell.x - 1 >= 0)
+				if(!visitedCells[guideCell.x - 1][guideCell.y])
 				return true;
 			break;
 		case 1: //direita
-			if (guideCell.x + 1 >=0)
+			if (guideCell.x + 1 < (size - 1) / 2)
+				if(!visitedCells[guideCell.x + 1][guideCell.y])
 				return true;
 			break;
 		case 2: //cima
-			if (guideCell.y - 1 >=0)
+			if (guideCell.y - 1 >= 0)
+				if(!visitedCells[guideCell.x][guideCell.y - 1])
 				return true;
 			break;
 		case 3: //baixo
-			if (guideCell.y + 1 >=0)
+			if (guideCell.y + 1 < (size - 1) / 2)
+				if(!visitedCells[guideCell.x][guideCell.y + 1])
 				return true;
 			break;
 		}

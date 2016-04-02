@@ -40,11 +40,12 @@ public class dragon extends character{
 		return state;
 	}
 	
-	public void randomPosition(sword espada) {
+	public void randomPosition(Labirinto lab, sword espada) {
 		
-		Labirinto lab = new Labirinto();
 		Random rn = new Random();
 		int x, y, rand;
+		
+		lab.getTable()[pos_x][pos_y] = ' ';
 		
 		rand = rn.nextInt(5);
 		
@@ -73,7 +74,7 @@ public class dragon extends character{
 		if (checkmove(lab, x, y)==true)
 			moveDragon(x, y, espada);
 		else if(checkmove(lab, x, y)==false)
-			randomPosition(espada);
+			randomPosition(lab, espada);
 	}
 	
 	public boolean checkmove(Labirinto lab, int x, int y) {

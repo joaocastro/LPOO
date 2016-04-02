@@ -11,8 +11,10 @@ public class GraphicsPanel extends JPanel {
 
 	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	private static final long serialVersionUID = 1L;
+	Image wall;
 	
 	public GraphicsPanel() {
+		wall = new ImageIcon("chao.png").getImage();
 		/*addMouseListener(this);
 		addMouseMotionListener(this);
 		addKeyListener(this);*/
@@ -20,15 +22,15 @@ public class GraphicsPanel extends JPanel {
 
 	public void paintComponent(Graphics g) {
 		
-		Image background;
+		/*Image background;
 		ImageIcon ii;
 		ii= new ImageIcon(this.getClass().getResource("chao.png"));
-		background = ii.getImage();
+		background = ii.getImage();*/
 		
 		super.paintComponent(g); // limpa fundo …
 		g.setColor(Color.BLUE);
 		
-		g.drawImage(background, 0, 0, null);
+		g.drawImage(wall, 20, 20, 300, 300, this);
 		}
 	
 	/*@Override

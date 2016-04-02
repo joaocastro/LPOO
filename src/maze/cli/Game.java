@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import maze.gui.Interface;
 import maze.logic.Labirinto;
+import maze.logic.MazeBuilder;
 import maze.logic.dragon;
 import maze.logic.hero;
 import maze.logic.sword;
@@ -15,44 +16,70 @@ public class Game {
 	private hero heroi;
 	private sword espada;
 	private Labirinto maze;
-	private char m1[][] = new char[][] {
-	{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'},
-	{'X',' ',' ',' ', ' ', ' ', ' ', ' ', ' ', 'X'},
-	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-	{'X',' ',' ',' ', ' ', ' ', ' ', 'X', ' ', 'S'},
-	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-	{'X',' ','X','X', ' ', 'X', ' ', 'X', ' ', 'X'},
-	{'X',' ','X','X', ' ', ' ', ' ', ' ', ' ', 'X'},
-	{'X','X','X','X', 'X', 'X', 'X', 'X', 'X', 'X'}
-	};
+	private char m1[][];
 	
 	private ArrayList<dragon> dragons;
 	
-	public Game(){
-		heroi = new hero(1,1);
-		espada = new sword(8,1);
-		maze = new Labirinto();
+	public void genHero(){
+		Random rand = new Random();
+		int x;
+		int y;
+		
+		while(true){
+			x= rand.nextInt(maze.getLines());
+			y = rand.nextInt(maze.getColumns());
+			
+			if (m1[x][y] == ' '){
+				heroi = new hero(x,y);
+				return;
+			}
+		}
+	}
+	
+	public void genSword(){
+		Random rand = new Random();
+		int x;
+		int y;
+		
+		while(true){
+			x= rand.nextInt(maze.getLines());
+			y = rand.nextInt(maze.getColumns());
+			
+			if (m1[x][y] == ' '){
+				espada = new sword(x,y);
+				return;
+			}
+		}
+	}
+	
+	
+	public Game(){}
+	
+	public void addMaze(int size){
+		MazeBuilder m = new MazeBuilder(size);
+		
+		maze = m.buildMaze();
+		m1 = m.getMaze();
 		dragons = new ArrayList<dragon>();
 	}
+	
 	
 	public void createDragons(int number){
 		while (number>0)
 		{
 			Random rn = new Random();
 			int rand, rand2;
-			rand = rn.nextInt(10);
-			rand2 = rn.nextInt(10);
+			rand = rn.nextInt(maze.getLines());
+			rand2 = rn.nextInt(maze.getColumns());
 			
 			if (rand==0)
 				rand++;
-			else if (rand==9)
+			else if (rand==maze.getLines() - 1)
 				rand--;
 			
 			if (rand2==0)
 				rand2++;
-			else if (rand2==9)
+			else if (rand2==maze.getColumns() - 1)
 				rand2--;		
 			
 			dragon dragontemp= new dragon(rand,rand2);
@@ -84,23 +111,24 @@ public class Game {
 		return temp;
 	}
 
-	public void playGame(){
-		
-		Labirinto lab1 = new Labirinto();
-		hero heroi = new hero(1,1);
-		sword espada = new sword(8,1);
-		lab1.printHero(heroi);
-		lab1.printSword(espada);
-		
+	public void playGame(){		
 		String index;
 		String direction;
 		int numberdragons;
 		
 		Scanner scn = new Scanner(System.in);
-		System.out.println("Numero de Dragoes desejado");
-		numberdragons = scn.nextInt();	
 		
+		int size;
+		System.out.println("Tamanho do tabuleiro:");
+		size = scn.nextInt();
+		System.out.println("\nNumero de Dragoes desejado");
+		numberdragons = scn.nextInt();
+		
+		addMaze(size);
+		genHero();
+		genSword();
 		createDragons(numberdragons);
+		updateBoard();
 		
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Selecione um modo de jogo:\n1 - Dragao parado;\n2 - Dragao com movimentacao aleatoria;\n3 - Dragao com posicao aleatoria intercalada com dormir;");
@@ -109,60 +137,35 @@ public class Game {
 		
 		while(true)
 		{
-			Labirinto lab = new Labirinto();
-			lab.printHero(heroi);
-			lab.printSword(espada);
-			for (int i=0; i<dragons.size(); i++)
-			{
-				lab.printDragon(dragons.get(i));
-			}
-			//lab.printDragon(dragao);
-			lab.printBoard();
+			updateBoard();
+			maze.printBoard();
 			
 			Scanner sc = new Scanner(System.in);
 			System.out.println("Faca um movimento(N S E O):");
 			String s = sc.nextLine();
 			direction=s;
 			
-			heroi.moveHero(lab, direction, espada, dragons);
+			heroi.moveHero(maze, direction, espada, dragons);
 			
-			if (win(heroi, lab)){
-				Labirinto temp2 = new Labirinto();
-				for (int i=0; i<dragons.size(); i++)
-				{
-					lab.printDragon(dragons.get(i));
-				}
-				temp2.printHero(heroi);
-				temp2.printSword(espada);
-				temp2.printBoard();
+			if (win(heroi, maze)){
+				updateBoard();
+				maze.printBoard();
 				System.out.println("Parabens, ganhou o jogo!");
 				break;
 			}
 			
 			if (check(heroi) == false){
-				Labirinto temp = new Labirinto();
-				for (int i=0; i<dragons.size(); i++)
-				{
-					temp.printDragon(dragons.get(i));
-				}
-				temp.printHero(heroi);
-				temp.printSword(espada);
-				temp.printBoard();
+				updateBoard();
+				maze.printBoard();
 				System.out.println("Perdeu o jogo");
 				break;
 			}
 			
-			Strategy(index, espada);
+			Strategy(index);
 			
 			if (check(heroi) == false){
-				Labirinto temp = new Labirinto();
-				for (int i=0; i<dragons.size(); i++)
-				{
-					temp.printDragon(dragons.get(i));
-				}
-				temp.printHero(heroi);
-				temp.printSword(espada);
-				temp.printBoard();
+				updateBoard();
+				maze.printBoard();
 				System.out.println("Perdeu o jogo");
 				break;
 			}
@@ -174,8 +177,8 @@ public class Game {
 		heroi.moveHero(maze, direction, espada, dragons);
 	}
 	
-	public void updateBoard(char[][] m){
-		maze.setTable(m);
+	public void updateBoard(){
+		maze.setTable(m1);
 		for (int i=0; i<dragons.size(); i++)
 		{
 			maze.printDragon(dragons.get(i));
@@ -246,25 +249,30 @@ public class Game {
 		return temp;
 	}
 	
-	public void Strategy(String index, sword espada){
+	public void Strategy(String index){
 		switch(index)
 		{
 		case "2":
 			for (int i = 0; i< dragons.size(); i++)
 			{
-				dragons.get(i).randomPosition(espada);
+				dragons.get(i).randomPosition(maze, espada);
 			}
 			break;
 		case "3":
 			for (int i = 0; i< dragons.size(); i++)
 			{
 				dragons.get(i).randomSleep();
-				dragons.get(i).randomPosition(espada);
+				dragons.get(i).randomPosition(maze, espada);
 			}
 			break;
 		default:
 			break;
 		}
+	}
+	
+	public void printMaze(){
+		updateBoard();
+		maze.printBoard();
 	}
 		
 	public static void main(String[] args) {

@@ -56,6 +56,16 @@ public class hero extends character{
 					pos_x--;
 				}
 			}
+			else if (lab.getTable()[pos_x - 1][pos_y] == 'S' && tipo == 'A')
+			{
+				boolean dead = true;
+				for(int i = 0;i < dragons.size(); i++){
+					if (dragons.get(i).getState() == true)
+						dead = false;
+				}
+				if (dead)
+					pos_x--;
+			}
 			break;
 		case "s":
 		case "S":
@@ -75,6 +85,16 @@ public class hero extends character{
 					findDragon(dragons, pos_x + 1, pos_y).changeState();
 					pos_x++;
 				}
+			}
+			else if (lab.getTable()[pos_x + 1][pos_y] == 'S' && tipo == 'A')
+			{
+				boolean dead = true;
+				for(int i = 0;i < dragons.size(); i++){
+					if (dragons.get(i).getState() == true)
+						dead = false;
+				}
+				if (dead)
+					pos_x++;
 			}
 			break;
 		case "e":
@@ -127,6 +147,16 @@ public class hero extends character{
 					findDragon(dragons, pos_x, pos_y - 1).changeState();
 					pos_y--;
 				}
+			}
+			else if (lab.getTable()[pos_x][pos_y - 1] == 'S' && tipo == 'A')
+			{
+				boolean dead = true;
+				for(int i = 0;i < dragons.size(); i++){
+					if (dragons.get(i).getState() == true)
+						dead = false;
+				}
+				if (dead)
+					pos_y--;
 			}
 			break;
 		}
