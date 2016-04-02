@@ -1,4 +1,4 @@
-package Proj;
+package maze.logic;
 
 import java.util.ArrayList;
 

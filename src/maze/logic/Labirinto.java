@@ -1,6 +1,8 @@
-package Proj;
+package maze.logic;
 
 import java.util.ArrayList;
+import java.util.Random;
+import java.awt.Point;
 
 public class Labirinto extends character{
 	
