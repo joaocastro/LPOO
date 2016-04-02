@@ -58,6 +58,9 @@ public class Game {
 	public void addMaze(int size){
 		MazeBuilder m = new MazeBuilder(size);
 		
+		genHero();
+		genSword();
+		
 		maze = m.buildMaze();
 		m1 = m.getMaze();
 		dragons = new ArrayList<dragon>();
@@ -125,8 +128,7 @@ public class Game {
 		numberdragons = scn.nextInt();
 		
 		addMaze(size);
-		genHero();
-		genSword();
+
 		createDragons(numberdragons);
 		updateBoard();
 		

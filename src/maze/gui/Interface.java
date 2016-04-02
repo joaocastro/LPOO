@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
@@ -22,9 +24,13 @@ import maze.logic.hero;
 import maze.logic.sword;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+
 import maze.gui.GraphicsPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.DropMode;
 
 public class Interface {
@@ -52,39 +58,24 @@ public class Interface {
 
 	/**
 	 * Create the application.
+	 * @throws IOException 
 	 */
-	public Interface() {
+	public Interface() throws IOException {
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
+	 * @throws IOException 
 	 */
-	private void initialize() {
+	private void initialize() throws IOException {
 
+		Game g1 = new Game();
 		frame = new JFrame();
+
 		frame.setBounds(100, 100, 132, 129);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
-		JPanel panel = new GraphicsPanel();
-		panel.setBounds(20, 20, 700, 700);
-		frame.getContentPane().add(panel);
-		frame.pack();
-		panel.requestFocus();
-		
-		
-		JButton btnNewButton_13 = new JButton("Terminar programa");
-		btnNewButton_13.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
-			
-			}
-		});
-		btnNewButton_13.setBounds(293, 58, 131, 36);
-		frame.getContentPane().add(btnNewButton_13);
-		
-		Game g1 = new Game();
-	
 		
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
@@ -96,6 +87,29 @@ public class Interface {
 		textField.setBounds(137, 11, 106, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
+		
+		JPanel panel = new GraphicsPanel(g1);
+		panel.setBounds(20, 20, 700, 700);
+		frame.getContentPane().add(panel);
+		frame.pack();
+		panel.requestFocus();
+
+		frame.setBounds(100, 100, 450, 300);
+		frame.setPreferredSize(new Dimension(700, 700));
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		frame.setVisible(true);
+		
+		JButton btnNewButton_13 = new JButton("Terminar programa");
+		btnNewButton_13.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			
+			}
+		});
+		btnNewButton_13.setBounds(293, 58, 131, 36);
+		frame.getContentPane().add(btnNewButton_13);
+		
 		
 		JLabel lblNewLabel = new JLabel("New label");
 		lblNewLabel.setBounds(159, 14, 46, 14);
@@ -110,8 +124,8 @@ public class Interface {
 		});
 		textField_1.setBounds(137, 45, 106, 20);
 		frame.getContentPane().add(textField_1);
-		textField_1.setColumns(10);
-		
+		textField_1.setColumns(10);		
+
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(159, 48, 46, 14);
 		frame.getContentPane().add(lblNewLabel_1);
@@ -171,7 +185,6 @@ public class Interface {
 					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
-				
 			}
 		});
 		Cima.setBounds(293, 114, 90, 40);
@@ -271,14 +284,29 @@ public class Interface {
 			//Game game = new Game();
 			//game.playGame();
 		Labirinto.setEnabled(true);
-			
+		
+		
 			btnNewButton.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					Cima.setEnabled(true);
-					Baixo.setEnabled(true);
-					Direita.setEnabled(true);
-					Esquerda.setEnabled(true);
+					lblNewLabel.setVisible(false);
+					lblNewLabel_1.setVisible(false);
+					btnNewButton.setVisible(false);
+					comboBox.setVisible(false);
+					lblTipoDeDrages.setVisible(false);
+					textField.setVisible(false);
+					textField_1.setVisible(false);
+					lblDimensoDoLabirinto.setVisible(false);
+					lblNmeroDeDrages.setVisible(false);
+					btnNewButton_13.setVisible(false);
+					Cima.setVisible(false);
+					Baixo.setVisible(false);
+					Direita.setVisible(false);
+					Esquerda.setVisible(false);
 					Labirinto.setText(g1.getMaze().toString());
+					Labirinto.setVisible(false);
+					JPanel panel = new GraphicsPanel(g1);
+					frame.getContentPane().add(panel);
+					frame.pack();
 				}
 			});
 		

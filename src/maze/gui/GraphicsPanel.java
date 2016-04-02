@@ -1,37 +1,104 @@
 package maze.gui;
 
-import javax.swing.ImageIcon;
+/*import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.Image;*/
 
-public class GraphicsPanel extends JPanel {
+import java.awt.*;
 
-	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
-	private static final long serialVersionUID = 1L;
-	Image wall;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+
+import maze.cli.Game;
+
+import java.awt.event.*;
+import java.io.File;
+
+public class GraphicsPanel extends JPanel implements KeyListener {
+
+	private Game jogo;
+	private Image wall, floor, dragon, sword, exit, hero, herowithsword;
+	//private int x;
+	//private int y;
+	private int size;
 	
-	public GraphicsPanel() {
-		wall = new ImageIcon("chao.png").getImage();
-		/*addMouseListener(this);
-		addMouseMotionListener(this);
-		addKeyListener(this);*/
+	public GraphicsPanel(Game g1) {
+		super();
+		//this.x=x;
+		//this.y=y;
+		jogo = g1;
+		
+		wall = new ImageIcon("parede.png").getImage();
+		floor = new ImageIcon("chao.png").getImage();
+		dragon = new ImageIcon("dragao.png").getImage();
+		sword = new ImageIcon("espada.png").getImage();
+		exit = new ImageIcon("saida.png").getImage();
+		hero = new ImageIcon("heroi.png").getImage();
+		herowithsword = new ImageIcon("heroicomespada.png").getImage();
+		size = wall.getWidth(null);
+		
 	}
+	
 
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		
-		/*Image background;
-		ImageIcon ii;
-		ii= new ImageIcon(this.getClass().getResource("chao.png"));
-		background = ii.getImage();*/
-		
-		super.paintComponent(g); // limpa fundo …
-		g.setColor(Color.BLUE);
-		
-		g.drawImage(wall, 20, 20, 300, 300, this);
+		for (int i=0; i<jogo.getMaze().getLines(); i++){
+			
+			for (int j=0; j<jogo.getMaze().getColumns(); j++)
+			{
+				if(jogo.getMaze().getTable()[i][j]==' ')
+				{
+					g.drawImage(floor, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='X')
+				{
+					g.drawImage(wall, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='D')
+				{
+					g.drawImage(dragon, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='E')
+				{
+					g.drawImage(sword, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='S')
+				{
+					g.drawImage(exit, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='H')
+				{
+					g.drawImage(hero, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.getMaze().getTable()[i][j]=='A')
+				{
+					g.drawImage(herowithsword, (i+1)*size, (j+1)*size, null);
+				}
+			}
 		}
+	}
+
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	/*@Override
 	public void keyPressed(KeyEvent arg0) {
@@ -84,4 +151,5 @@ public class GraphicsPanel extends JPanel {
 		
 	}*/
 	
+
 }
