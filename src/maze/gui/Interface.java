@@ -13,12 +13,13 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 
-import Proj.Labirinto;
-import Proj.hero;
-import Proj.sword;
-import Proj.dragon;
-
 import maze.cli.Game;
+import maze.logic.Labirinto;
+import maze.logic.MazeBuilder;
+import maze.logic.dragon;
+import maze.logic.hero;
+import maze.logic.sword;
+
 import java.awt.Component;
 import java.awt.Font;
 import javax.swing.DropMode;
@@ -85,8 +86,9 @@ public class Interface {
 		frame.getContentPane().add(lblNewLabel);
 		
 		Game g1 = new Game();
+		MazeBuilder m1 = new MazeBuilder(11);
 		
-		g1.updateBoard();
+		g1.updateBoard(m1.getMaze());
 		
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
@@ -99,7 +101,7 @@ public class Interface {
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 		
-		g1.updateBoard();
+		g1.updateBoard(m1.getMaze());
 		
 		JLabel lblNewLabel_1 = new JLabel("New label");
 		lblNewLabel_1.setBounds(159, 48, 46, 14);
@@ -124,9 +126,9 @@ public class Interface {
 		Cima.setEnabled(false);
 		Cima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				g1.makePlay("N");
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
@@ -142,9 +144,9 @@ public class Interface {
 		Esquerda.setEnabled(false);
 		Esquerda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				g1.makePlay("O");
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
@@ -160,9 +162,9 @@ public class Interface {
 		Direita.setEnabled(false);
 		Direita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				g1.makePlay("E");
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())
@@ -178,9 +180,9 @@ public class Interface {
 		Baixo.setEnabled(false);
 		Baixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e){
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				g1.makePlay("S");
-				g1.updateBoard();
+				g1.updateBoard(m1.getMaze());
 				if(!g1.check())
 					Labirinto.setText("Perdeu o jogo!");
 				else if(g1.win())

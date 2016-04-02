@@ -2,14 +2,13 @@ package maze.cli;
 
 import java.util.Random;
 import java.util.Scanner;
-
-import Proj.Labirinto;
 import java.util.ArrayList;
-import Proj.hero;
-import Proj.sword;
-import Proj.dragon;
 
 import maze.gui.Interface;
+import maze.logic.Labirinto;
+import maze.logic.dragon;
+import maze.logic.hero;
+import maze.logic.sword;
 
 public class Game {
 	
@@ -175,8 +174,8 @@ public class Game {
 		heroi.moveHero(maze, direction, espada, dragons);
 	}
 	
-	public void updateBoard(){
-		maze.setTable(m1);
+	public void updateBoard(char[][] m){
+		maze.setTable(m);
 		for (int i=0; i<dragons.size(); i++)
 		{
 			maze.printDragon(dragons.get(i));

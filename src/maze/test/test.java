@@ -4,8 +4,9 @@ package maze.test;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
-import Proj.*;
+
 import maze.cli.*;
+import maze.logic.*;
 
 public class test {
 	

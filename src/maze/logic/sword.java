@@ -1,4 +1,4 @@
-package Proj;
+package maze.logic;
 
 public class sword extends character{
 	
