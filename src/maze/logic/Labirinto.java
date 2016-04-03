@@ -129,4 +129,12 @@ public class Labirinto extends character{
 	public void setTable(char[][] tab){
 		table = tab;
 	}
+	
+	public void resetMaze(){
+		for (int i = 0; i < lines; i++)
+			for(int j = 0; j<columns; j++){
+				if(table[i][j] != ' ' && table[i][j] != 'S' && table[i][j] != 'X')
+					table[i][j] = ' ';
+			}
+	}
 }

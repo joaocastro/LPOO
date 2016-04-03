@@ -180,7 +180,7 @@ public class Game {
 	}
 	
 	public void updateBoard(){
-		maze.setTable(m1);
+		maze.resetMaze();
 		for (int i=0; i<dragons.size(); i++)
 		{
 			maze.printDragon(dragons.get(i));
@@ -243,9 +243,12 @@ public class Game {
 			if ((heroi.getPos_x() + 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
 					|| (heroi.getPos_x() - 1 == dragao.getPos_x() && heroi.getPos_y() == dragao.getPos_y())
 					|| (heroi.getPos_y() + 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x())
-					|| (heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
+					|| (heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x())){
 				if (heroi.getName() == 'H' && dragao.getName() != 'd')
 					temp = false;
+				if (heroi.getName() == 'A')
+					dragons.get(i).changeState();
+			}
 		}
 		
 		return temp;
