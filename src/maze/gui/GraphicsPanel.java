@@ -20,7 +20,7 @@ import java.io.File;
 public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 
 	private Game jogo;
-	private Image wall, floor, dragon, sword, exit, hero, herowithsword;
+	private Image wall, floor, dragon, sword, exit, hero, herowithsword, lost, won;
 	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	private int size;
 	
@@ -37,6 +37,8 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		exit = new ImageIcon("saida.png").getImage();
 		hero = new ImageIcon("heroi.png").getImage();
 		herowithsword = new ImageIcon("heroicomespada.png").getImage();
+		lost = new ImageIcon("perdeu.png").getImage();
+		won = new ImageIcon("ganhou.png").getImage();
 		size = wall.getWidth(null);
 		
 		addKeyListener(new KeyListener() {
@@ -45,22 +47,27 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		    public void keyPressed(KeyEvent e) {
 		    	
 		    	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		            jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
+		            jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
 		            jogo.updateBoard();
-		            repaint();
+		            
+		      
+				//	g1.Strategy(jogo.Strategy); vamos ter que passar a estrategia
+					jogo.updateBoard();
+					repaint();
+					
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		        	jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
+		        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
 		        	jogo.updateBoard();
 		        	repaint();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_UP) {
-		        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
+		        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
 		        	jogo.updateBoard();	
 		        	repaint();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-		        	jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
+		        	jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
 		        	jogo.updateBoard();
 		        	repaint();
 		        }
@@ -117,6 +124,16 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 				if (jogo.getMaze().getTable()[i][j]=='A')
 				{
 					g.drawImage(herowithsword, (i+1)*size, (j+1)*size, null);
+				}
+				if (jogo.win())
+				{
+					super.paintComponent(g);
+					g.drawImage(won,  0, 0, null);
+				}
+				if (!jogo.check())
+				{
+					super.paintComponent(g);
+					g.drawImage(lost, 0, 0, null);	
 				}
 			}
 		}
