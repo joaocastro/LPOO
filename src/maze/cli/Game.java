@@ -289,4 +289,14 @@ public class Game {
 	public Labirinto getMaze(){
 		return maze;
 	}
+
+	public hero getHero() {
+		return heroi;
+	}
+
+	public sword getSword() {
+		return espada;
+	}
+	
+	
 }
