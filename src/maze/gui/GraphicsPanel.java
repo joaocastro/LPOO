@@ -17,7 +17,7 @@ import maze.cli.Game;
 import java.awt.event.*;
 import java.io.File;
 
-public class GraphicsPanel extends JPanel implements KeyListener {
+public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 
 	private Game jogo;
 	private Image wall, floor, dragon, sword, exit, hero, herowithsword;
@@ -39,7 +39,41 @@ public class GraphicsPanel extends JPanel implements KeyListener {
 		herowithsword = new ImageIcon("heroicomespada.png").getImage();
 		size = wall.getWidth(null);
 		
-		addKeyListener(this);
+		addKeyListener(new KeyListener() {
+			
+			@Override
+		    public void keyPressed(KeyEvent e) {
+		    	
+		    	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		            jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
+		            jogo.updateBoard();
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
+		        	jogo.updateBoard();
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_UP) {
+		        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
+		        	jogo.updateBoard();		        }
+		        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		        	jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
+		        	jogo.updateBoard();
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
+		        	System.exit(0); //se experimentares fazer 'ESC', funciona
+		        }
+		    }
+
+
+		    @Override
+		    public void keyReleased(KeyEvent e) {
+		        
+		    }
+
+			@Override
+			public void keyTyped(KeyEvent arg0) {
+			}
+		});
 		
 	}
 	
@@ -83,72 +117,9 @@ public class GraphicsPanel extends JPanel implements KeyListener {
 		}
 	}
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-    	
-    	Graphics g = null;
-
-    	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
-            jogo.updateBoard();
-            paintComponent(g);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
-        	jogo.updateBoard();
-        	paintComponent(g);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
-        	jogo.updateBoard();
-        	paintComponent(g);
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
-        	jogo.updateBoard();
-        	paintComponent(g);
-        }
-    }
-
-
-    @Override
-    public void keyReleased(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
-        }
-        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
-        }
-        if (e.getKeyCode() == KeyEvent.VK_UP) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
-        }
-        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-        	jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
-        }
-    }
-
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+    
 	
 	/*@Override
-	public void keyPressed(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyReleased(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
 	public void mouseDragged(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
