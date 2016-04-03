@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
@@ -301,6 +302,8 @@ public class Interface {
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
 				frame.pack();
+				panel.repaint();
+				panel.setFocusable(true);
 				panel.requestFocus();
 			}
 		});
