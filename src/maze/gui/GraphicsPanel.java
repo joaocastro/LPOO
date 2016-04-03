@@ -23,6 +23,10 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	private int size;
 	
+	/**
+	 * GraphicsPanel constructor
+	 * @param g1
+	 */
 	public GraphicsPanel(Game g1) {
 		super();
 		//this.x=x;
@@ -105,7 +109,9 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		
 	}
 	
-
+	/**
+	 * Overload of the paintComponent function. Prints the game in graphics mode
+	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		

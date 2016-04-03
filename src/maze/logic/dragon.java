@@ -9,6 +9,11 @@ public class dragon extends character{
 	private char tipo;
 	private boolean sleep;
 	
+	/**
+	 * Dragon constructer
+	 * @param x
+	 * @param y
+	 */
 	public dragon(int x, int y){
 		pos_x = x;
 		pos_y = y;
@@ -16,30 +21,58 @@ public class dragon extends character{
 		sleep = false;
 	}
 	
+	/**
+	 * Checks if the dragon is alive
+	 * @return state
+	 */
 	public boolean isAlive() {
 		return state;
 	}
 	
+	/**
+	 * Returns the x coordinate of the dragon
+	 * @return pos_x
+	 */
 	public int getPos_x(){
 		return pos_x;
 	}
 	
+	/**
+	 * Returns the y coordinate of the dragon
+	 * @return pos_y
+	 */
 	public int getPos_y(){
 		return pos_y;
 	}
 	
+	/**
+	 * Returns the type of the dragon
+	 * @return tipo
+	 */
 	public char getName(){
 		return tipo;
 	}
 	
+	/**
+	 * Changes the status of the dragon to false
+	 */
 	public void changeState() {
 		state = false;
 	}
 	
+	/**
+	 * Returns the status of the dragon
+	 * @return state
+	 */
 	public boolean getState() {	
 		return state;
 	}
 	
+	/**
+	 * Generates a random move for the dragon
+	 * @param lab
+	 * @param espada
+	 */
 	public void randomPosition(Labirinto lab, sword espada) {
 		
 		Random rn = new Random();
@@ -77,6 +110,13 @@ public class dragon extends character{
 			randomPosition(lab, espada);
 	}
 	
+	/**
+	 * Checks if the dragon can make a specified move
+	 * @param lab
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	public boolean checkmove(Labirinto lab, int x, int y) {
 		
 		if (lab.getTable()[x][y] != 'X' && lab.getTable()[x][y] != 'S')
@@ -85,6 +125,12 @@ public class dragon extends character{
 			return false;
 	}
 	
+	/**
+	 * Moves the dragon
+	 * @param x
+	 * @param y
+	 * @param espada
+	 */
 	public void moveDragon(int x, int y, sword espada){
 		
 		if (sleep == false) {
@@ -98,16 +144,25 @@ public class dragon extends character{
 		}
 	}
 	
+	/**
+	 * Makes the dragon sleep
+	 */
 	public void Sleep(){
 		sleep = true;
 		tipo = Character.toLowerCase(tipo);
 	}
 	
+	/**
+	 * Makes the dragon wake up
+	 */
 	public void WakeUp(){
 		sleep = false;
 		tipo = Character.toUpperCase(tipo);
 	}
 	
+	/**
+	 * Makes the dragon sleep or wake up randomly
+	 */
 	public void randomSleep(){
 		Random rn = new Random();
 		int rand;

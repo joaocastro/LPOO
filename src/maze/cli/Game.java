@@ -21,6 +21,9 @@ public class Game {
 	
 	private ArrayList<dragon> dragons;
 	
+	/**
+	 * Generates a Hero in a random available position
+	 */
 	public void genHero(){
 		Random rand = new Random();
 		int x;
@@ -37,6 +40,9 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Generates a Sword in a random available position
+	 */
 	public void genSword(){
 		Random rand = new Random();
 		int x;
@@ -53,9 +59,16 @@ public class Game {
 		}
 	}
 	
-	
+	/**
+	 * Game constructor
+	 */
 	public Game(){}
 	
+	
+	/**
+	 * Adds a maze to the game
+	 * @param size
+	 */
 	public void addMaze(int size){
 		MazeBuilder m = new MazeBuilder(size);
 		
@@ -67,7 +80,10 @@ public class Game {
 		updateBoard();
 	}
 	
-	
+	/**
+	 * Generates a number of dragons in the maze in random available positions
+	 * @param number
+	 */
 	public void createDragons(int number){
 		while (number>0)
 		{
@@ -97,6 +113,14 @@ public class Game {
 		}
 	}
 	
+	
+	/**
+	 * Checks if a dragon can be placed in the maze
+	 * 
+	 * @param d
+	 * @param lab
+	 * @return
+	 */
 	public boolean isAvailable(dragon d, Labirinto lab) {
 
 		boolean temp;
@@ -114,7 +138,11 @@ public class Game {
 
 		return temp;
 	}
-
+	
+	/**
+	 * Plays the game (on the console)
+	 * 
+	 */
 	public void playGame(){		
 		String index;
 		String direction;
@@ -177,10 +205,19 @@ public class Game {
 
 	}
 	
+	/**
+	 * Moves the hero, to make a play
+	 * 
+	 * @param direction
+	 */
 	public void makePlay(String direction){
 		heroi.moveHero(maze, direction, espada, dragons);
 	}
 	
+	
+	/**
+	 * Updates the board (used after every move)
+	 */
 	public void updateBoard(){
 		maze.resetMaze();
 		for (int i=0; i<dragons.size(); i++)
@@ -191,6 +228,10 @@ public class Game {
 		maze.printSword(espada);
 	}
 	
+	/**
+	 * Checks if the hero won the game(used after every move)
+	 * @return
+	 */
 	public boolean win(){		
 		if (heroi.getPos_x() == maze.getExit_xPos() && heroi.getPos_y() == maze.getExit_yPos())
 			return true;
@@ -198,6 +239,13 @@ public class Game {
 			return false;
 	}
 	
+	/**
+	 * Checks if the hero won the game(used after every move)
+	 * 
+	 * @param heroi
+	 * @param lab
+	 * @return
+	 */
 	public boolean win(hero heroi, Labirinto lab){
 		boolean temp = true;
 		
@@ -216,6 +264,10 @@ public class Game {
 		return temp;
 	}
 	
+	/**
+	 * Checks the status of the game (if the hero is still alive)
+	 * @return
+	 */
 	public boolean check(){
 		boolean temp = true;
 		
@@ -239,6 +291,11 @@ public class Game {
 		return temp;
 	}
 	
+	/**
+	 * Checks the status of the game (if the hero is still alive)
+	 * @param heroi
+	 * @return
+	 */
 	public boolean check(hero heroi)
 	{
 		boolean temp = true;
@@ -264,6 +321,10 @@ public class Game {
 		return temp;
 	}
 	
+	/**
+	 * Makes the dragons move, sleep, or do nothing, depending on the type of game
+	 * @param index
+	 */
 	public void Strategy(String index){
 		switch(index)
 		{
@@ -285,36 +346,67 @@ public class Game {
 		}
 	}
 	
+	/**
+	 * Prints the maze
+	 */
 	public void printMaze(){
 		updateBoard();
 		maze.printBoard();
 	}
-		
+	
+	/**
+	 * Main function
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Game game1 = new Game();
 		game1.playGame();
 	}
 
+	/**
+	 * Returns the array of dragons
+	 * @return dragons
+	 */
 	public ArrayList<dragon> getDragons(){
 		return dragons;
 	}
 	
+	/**
+	 * Returns the maze
+	 * @return maze
+	 */
 	public Labirinto getMaze(){
 		return maze;
 	}
 
+	/**
+	 * Returns the hero
+	 * @return heroi
+	 */
 	public hero getHero() {
 		return heroi;
 	}
 
+	/**
+	 * Returns the sword
+	 * @return sword
+	 */
 	public sword getSword() {
 		return espada;
 	}
 	
+	/**
+	 * Defines a Game Mode
+	 * @param s
+	 */
 	public void setStrat(String s){
 		strat = s;
 	}
 	
+	/**
+	 * Returns the Game Mode
+	 * @return strat
+	 */
 	public String getStrat(){
 		return strat;
 	}

@@ -13,10 +13,18 @@ public class MazeBuilder {
 	private Point guideCell;
 	int size;
 	
+	/**
+	 * MazeBuilder constructor
+	 * @param siz
+	 */
 	public MazeBuilder(int siz){
 		size = siz;
 	}
 	
+	/**
+	 * Generates a random maze
+	 * @return maze
+	 */
 	public Labirinto buildMaze(){
 		maze = new char[size][size];
 		
@@ -127,6 +135,10 @@ public class MazeBuilder {
 		
 	}
 	
+	/**
+	 * Moves the guideCell randomly
+	 * @param dir
+	 */
 	public void moveGuideCell(int dir){
 		int x = guideCell.x;
 		int y = guideCell.y;
@@ -146,6 +158,11 @@ public class MazeBuilder {
 		}
 	}
 	
+	/**
+	 * Checks if the guideCell can make a move
+	 * @param dir
+	 * @return
+	 */
 	public boolean canMove(int dir){
 		switch(dir){
 		case 0: //esquerda
@@ -172,6 +189,10 @@ public class MazeBuilder {
 		return false;
 	}
 	
+	/**
+	 * Checks if the guideCell can make any move
+	 * @return
+	 */
 	public boolean guideCellCanGoSomewhere() {
 		boolean guideCellCanGoSomewhere = false;
 
@@ -182,6 +203,10 @@ public class MazeBuilder {
 		return guideCellCanGoSomewhere;
 	}
 	
+	/**
+	 * returns the maze (2D array)
+	 * @return maze
+	 */
 	public char[][] getMaze(){
 		return maze;
 	}
