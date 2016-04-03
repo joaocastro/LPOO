@@ -52,8 +52,9 @@ public class hero extends character{
 			else if (lab.getTable()[pos_x - 1][pos_y] == 'D' || lab.getTable()[pos_x - 1][pos_y] == 'd')
 			{
 				if(tipo == 'A'){
-					findDragon(dragons, pos_x -1, pos_y).changeState();
+					findDragon(dragons, pos_x - 1, pos_y).changeState();
 					pos_x--;
+					killDragonsAround(dragons);
 				}
 			}
 			else if (lab.getTable()[pos_x - 1][pos_y] == 'S' && tipo == 'A')
@@ -171,6 +172,17 @@ public class hero extends character{
 		dragon d1 = new dragon(1000,1000);
 		
 		return d1;
+	}
+	public void killDragonsAround(ArrayList<dragon> dragons){
+		for (int i = 0;i < dragons.size(); i++){
+			dragon dragao = dragons.get(i);
+			
+			if ((pos_x + 1 == dragao.getPos_x() && pos_y == dragao.getPos_y())
+					|| (pos_x - 1 == dragao.getPos_x() && pos_y == dragao.getPos_y())
+					|| (pos_y + 1 == dragao.getPos_y() && pos_y == dragao.getPos_x())
+					|| (pos_y - 1 == dragao.getPos_y() && pos_x == dragao.getPos_x()))
+				dragons.get(i).changeState();
+		}
 	}
 
 }

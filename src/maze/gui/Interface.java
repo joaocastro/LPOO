@@ -298,6 +298,7 @@ public class Interface {
 				Esquerda.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
+				g1.setStrat(s);
 				JPanel panel = new GraphicsPanel(g1);
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);

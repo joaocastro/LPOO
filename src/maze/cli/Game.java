@@ -15,6 +15,7 @@ public class Game {
 	
 	private hero heroi;
 	private sword espada;
+	private String strat;
 	private Labirinto maze;
 	private char m1[][];
 	
@@ -135,6 +136,7 @@ public class Game {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Selecione um modo de jogo:\n1 - Dragao parado;\n2 - Dragao com movimentacao aleatoria;\n3 - Dragao com posicao aleatoria intercalada com dormir;");
 		index = scan.nextLine();
+		setStrat(index);
 		
 		
 		while(true)
@@ -227,7 +229,12 @@ public class Game {
 					|| (heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x()))
 				if (heroi.getName() == 'H' && dragao.getName() != 'd')
 					temp = false;
+				else if (heroi.getName() == 'A'){
+					dragons.get(i).changeState();
+				}
 		}
+		
+		updateBoard();
 		
 		return temp;
 	}
@@ -246,10 +253,13 @@ public class Game {
 					|| (heroi.getPos_y() - 1 == dragao.getPos_y() && heroi.getPos_x() == dragao.getPos_x())){
 				if (heroi.getName() == 'H' && dragao.getName() != 'd')
 					temp = false;
-				if (heroi.getName() == 'A')
+				if (heroi.getName() == 'A'){
 					dragons.get(i).changeState();
+				}
 			}
 		}
+		
+		updateBoard();
 		
 		return temp;
 	}
@@ -301,5 +311,11 @@ public class Game {
 		return espada;
 	}
 	
+	public void setStrat(String s){
+		strat = s;
+	}
 	
+	public String getStrat(){
+		return strat;
+	}
 }
