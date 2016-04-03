@@ -302,9 +302,9 @@ public class Interface {
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
 				frame.pack();
-				panel.repaint();
 				panel.setFocusable(true);
 				panel.requestFocus();
+				panel.repaint();
 			}
 		});
 

@@ -45,19 +45,24 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		    public void keyPressed(KeyEvent e) {
 		    	
 		    	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-		            jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
+		            jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
 		            jogo.updateBoard();
+		            repaint();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-		        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
+		        	jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
 		        	jogo.updateBoard();
+		        	repaint();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_UP) {
 		        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
-		        	jogo.updateBoard();		        }
+		        	jogo.updateBoard();	
+		        	repaint();
+		        }
 		        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 		        	jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
 		        	jogo.updateBoard();
+		        	repaint();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_ESCAPE){
 		        	System.exit(0); //se experimentares fazer 'ESC', funciona
