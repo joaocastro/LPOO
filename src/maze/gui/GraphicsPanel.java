@@ -46,6 +46,7 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		    public void keyPressed(KeyEvent e) {
 		    	
 		    	if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+<<<<<<< HEAD
 		    		jogo.makePlay("E");		
 		    		jogo.updateBoard();
 		            repaint();
@@ -59,6 +60,19 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 		        	jogo.makePlay("O");
+=======
+		            jogo.getHero().moveHero(jogo.getMaze(), "S", jogo.getSword(), jogo.getDragons());
+		            jogo.updateBoard();
+		            
+		      
+				//	g1.Strategy(jogo.Strategy); vamos ter que passar a estrategia
+					jogo.updateBoard();
+					repaint();
+					
+		        }
+		        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		        	jogo.getHero().moveHero(jogo.getMaze(), "N", jogo.getSword(), jogo.getDragons());
+>>>>>>> d2c1fe60d957219ed50458349d3c053d87b18d32
 		        	jogo.updateBoard();
 		        	repaint();
 				      
@@ -68,7 +82,11 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 					g1.updateBoard();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_UP) {
+<<<<<<< HEAD
 		        	jogo.makePlay("N");
+=======
+		        	jogo.getHero().moveHero(jogo.getMaze(), "O", jogo.getSword(), jogo.getDragons());
+>>>>>>> d2c1fe60d957219ed50458349d3c053d87b18d32
 		        	jogo.updateBoard();	
 		        	repaint();
 				      
@@ -78,7 +96,11 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 					g1.updateBoard();
 		        }
 		        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+<<<<<<< HEAD
 		        	jogo.makePlay("S");
+=======
+		        	jogo.getHero().moveHero(jogo.getMaze(), "E", jogo.getSword(), jogo.getDragons());
+>>>>>>> d2c1fe60d957219ed50458349d3c053d87b18d32
 		        	jogo.updateBoard();
 		        	repaint();
 				      
@@ -157,8 +179,21 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 					super.paintComponent(g);
 					g.drawImage(lost, 0, 0, null);	
 				}
+<<<<<<< HEAD
 				
 				x+=sizeObj_H;
+=======
+				if (jogo.win())
+				{
+					super.paintComponent(g);
+					g.drawImage(won,  0, 0, null);
+				}
+				if (!jogo.check())
+				{
+					super.paintComponent(g);
+					g.drawImage(lost, 0, 0, null);	
+				}
+>>>>>>> d2c1fe60d957219ed50458349d3c053d87b18d32
 			}
 			x = 0;
 			y+=sizeObj_V;
