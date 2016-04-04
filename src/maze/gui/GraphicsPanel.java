@@ -16,7 +16,7 @@ import maze.cli.Game;
 import java.awt.event.*;
 import java.io.File;
 
-public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
+public class GraphicsPanel extends JPanel implements MouseListener {
 
 	private Game jogo;
 	private Image wall, floor, dragon, sword, exit, hero, herowithsword, lost, won, sleepingdragon;
@@ -27,7 +27,7 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 	 * GraphicsPanel constructor
 	 * @param g1
 	 */
-	public GraphicsPanel(Game g1) {
+	public GraphicsPanel(Game g1){
 		super();
 		//this.x=x;
 		//this.y=y;
@@ -178,41 +178,44 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 
     
 	
-	/*@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
+		
+		this.x1=arg0.getX();
+		this.x2=arg0.getY();
+		int MAX_SIZE = 10 * size;
+				
+		x1=x1/MAX_SIZE;
+		x2=x2/MAX_SIZE;	
+		
+		//não estou a perceber como é que agora vou buscar o ponto inicial do "quadrado" para pintar
+	
 		
 	}
+
 	@Override
 	public void mouseEntered(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void mouseExited(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
+
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}*/
+	}
 	
 
 }
