@@ -370,8 +370,7 @@ public class Interface extends JFrame implements MouseListener{
 				//Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
 				
-				created_maze = true;
-				random_maze = false;
+				
 				
 				String s = (String)comboBox.getSelectedItem();
 				String strat  = "";
@@ -469,6 +468,9 @@ public class Interface extends JFrame implements MouseListener{
 				Labirinto.setVisible(false);
 				String s = (String)comboBox.getSelectedItem();
 				String strat  = "";
+				
+				created_maze = true;
+				random_maze = false;
 
 				switch(s){
 				case "Estáticos":
