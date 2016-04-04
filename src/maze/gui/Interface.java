@@ -425,10 +425,7 @@ public class Interface extends JFrame implements MouseListener{
 				lblDimensoDoLabirinto.setVisible(false);
 				lblNmeroDeDrages.setVisible(false);
 				btnNewButton_13.setVisible(false);
-				Cima.setVisible(false);
-				Baixo.setVisible(false);
-				Direita.setVisible(false);
-				Esquerda.setVisible(false);
+
 				btnGerarLabirintoManual.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
