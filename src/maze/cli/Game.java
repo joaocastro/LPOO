@@ -82,6 +82,22 @@ public class Game {
 		updateBoard();
 	}
 	
+	/**
+	 * Tests if a maze has a valid size
+	 * @param size
+	 * @throws IllegalArgumentException
+	 */
+	public void validMaze(int size) throws IllegalArgumentException{
+		
+		if (size <= 3 || size % 2 == 0)
+			throw new IllegalArgumentException();
+	}
+	
+	/**
+	 * Tests if a specific number of dragons can be created in the maze
+	 * @param number
+	 * @throws IllegalArgumentException
+	 */
 	public void validDragons(int number) throws IllegalArgumentException{
 		
 		int count = 0;

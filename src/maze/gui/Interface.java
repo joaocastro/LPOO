@@ -42,7 +42,11 @@ public class Interface extends JFrame implements MouseListener{
 	private JTextField textField_1;
 	private JTextArea Labirinto;
 	private ManualMaze manual;
+	private JPanel panel;
 	private JTextField textField_2;
+	private boolean random_maze = false;
+	private boolean created_maze = false;
+	private Game g1;
 	
 	/**
 	 * Launch the application.
@@ -77,7 +81,7 @@ public class Interface extends JFrame implements MouseListener{
 	 */
 	private void initialize() throws IOException {
 
-		Game g1 = new Game();
+		g1 = new Game();
 		frame = new JFrame();
 		frame.setBounds(100, 100, 450, 300);
 		frame.setPreferredSize(new Dimension(700, 700));
@@ -98,17 +102,20 @@ public class Interface extends JFrame implements MouseListener{
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
+		textField.setText("11");
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				
+			boolean got = false;	
 				try {
-					g1.validDragons(Integer.parseInt(textField_1.getText())); //
+					g1.validMaze(Integer.parseInt(textField.getText()));
 					}
 				catch (IllegalArgumentException a){
 					textField_2.setText("Argumento Inválido");
-					}
+					got = true;
 					
-				g1.addMaze(Integer.parseInt(textField.getText()));
+					}
+				if (!got)	
+					g1.addMaze(Integer.parseInt(textField.getText()));
 			}
 		});
 		textField.setBounds(227, 17, 106, 20);
@@ -123,18 +130,19 @@ public class Interface extends JFrame implements MouseListener{
 
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_1.setText("1");
 		textField_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				boolean got = false;
 				try {
 				g1.validDragons(Integer.parseInt(textField_1.getText()));
 				}
 				catch (IllegalArgumentException a){
 					textField_2.setText("Argumento Inválido");
+					got = true;
 				}
-				
-				g1.createDragons(Integer.parseInt(textField_1.getText()));
-				
+				if (!got)
+					g1.createDragons(Integer.parseInt(textField_1.getText()));
 			}
 		});
 		
@@ -195,6 +203,10 @@ public class Interface extends JFrame implements MouseListener{
 				else
 					Labirinto.setText(g1.getMaze().toString());
 
+				if (random_maze && !created_maze)
+					panel.repaint();
+				else
+					manual.repaint();
 			}
 		});
 		Cima.setBounds(293, 114, 90, 40);
@@ -222,6 +234,12 @@ public class Interface extends JFrame implements MouseListener{
 					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+
+				if (random_maze && !created_maze)
+					panel.repaint();
+				else
+					manual.repaint();
 			}
 		});
 		Esquerda.setBounds(237, 157, 90, 40);
@@ -249,6 +267,12 @@ public class Interface extends JFrame implements MouseListener{
 					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+
+				if (random_maze && !created_maze)
+					panel.repaint();
+				else
+					manual.repaint();
 			}
 		});
 		Direita.setBounds(335, 157, 90, 40);
@@ -276,6 +300,12 @@ public class Interface extends JFrame implements MouseListener{
 					Labirinto.setText("Perdeu o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+
+				if (random_maze && !created_maze)
+					panel.repaint();
+				else
+					manual.repaint();
 			}
 		});
 		Baixo.setBounds(293, 199, 90, 40);
@@ -324,18 +354,27 @@ public class Interface extends JFrame implements MouseListener{
 				lblTipoDeDrages.setVisible(false);
 				textField.setVisible(false);
 				textField_1.setVisible(false);
+				textField_2.setVisible(false);
 				lblDimensoDoLabirinto.setVisible(false);
 				lblNmeroDeDrages.setVisible(false);
 				btnNewButton_13.setVisible(false);
-				Cima.setVisible(false);
-				Baixo.setVisible(false);
-				Direita.setVisible(false);
-				Esquerda.setVisible(false);
+				Cima.setVisible(true);
+				Baixo.setVisible(true);
+				Direita.setVisible(true);
+				Esquerda.setVisible(true);
+				Cima.setEnabled(true);
+				Baixo.setEnabled(true);
+				Direita.setEnabled(true);
+				Esquerda.setEnabled(true);
 				playCreated.setVisible(false);
 				btnGerarLabirintoManual.setVisible(false);
 				frame.setPreferredSize(new Dimension (700, 700));
 				//Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
+				
+				created_maze = true;
+				random_maze = false;
+				
 				String s = (String)comboBox.getSelectedItem();
 				String strat  = "";
 				
@@ -351,15 +390,12 @@ public class Interface extends JFrame implements MouseListener{
 					break;	
 				}
 
-				Game jogo = manual.getGame();
-				jogo.setStrat(strat);
-				JPanel panel = new GraphicsPanel(jogo);
+				g1 = manual.getGame();
+				g1.setStrat(strat);
+				panel = new GraphicsPanel(g1);
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
 				frame.pack();
-				
-				if (jogo.win())
-					System.exit(0);
 				
 				panel.setFocusable(true);
 				panel.requestFocus();
@@ -372,7 +408,7 @@ public class Interface extends JFrame implements MouseListener{
 		
 		textField_2 = new JTextField();
 		textField_2.setEditable(false);
-		textField_2.setBounds(100, 0, 233, 14);
+		textField_2.setBounds(100, 2, 233, 14);
 		frame.getContentPane().add(textField_2);
 		textField_2.setColumns(10);
 		
@@ -385,6 +421,7 @@ public class Interface extends JFrame implements MouseListener{
 				lblTipoDeDrages.setVisible(false);
 				textField.setVisible(false);
 				textField_1.setVisible(false);
+				textField_2.setVisible(false);
 				lblDimensoDoLabirinto.setVisible(false);
 				lblNmeroDeDrages.setVisible(false);
 				btnNewButton_13.setVisible(false);
@@ -395,6 +432,9 @@ public class Interface extends JFrame implements MouseListener{
 				btnGerarLabirintoManual.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
+				
+				random_maze = true;
+				created_maze = false;
 				
 				manual = new ManualMaze(Integer.parseInt(textField.getText()));
 				frame.getContentPane().add(manual);
@@ -417,13 +457,18 @@ public class Interface extends JFrame implements MouseListener{
 				lblTipoDeDrages.setVisible(false);
 				textField.setVisible(false);
 				textField_1.setVisible(false);
+				textField_2.setVisible(false);
 				lblDimensoDoLabirinto.setVisible(false);
 				lblNmeroDeDrages.setVisible(false);
 				btnNewButton_13.setVisible(false);
-				Cima.setVisible(false);
-				Baixo.setVisible(false);
-				Direita.setVisible(false);
-				Esquerda.setVisible(false);
+				Cima.setVisible(true);
+				Baixo.setVisible(true);
+				Direita.setVisible(true);
+				Esquerda.setVisible(true);
+				Cima.setEnabled(true);
+				Baixo.setEnabled(true);
+				Direita.setEnabled(true);
+				Esquerda.setEnabled(true);
 				btnGerarLabirintoManual.setVisible(false);
 				//Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
@@ -442,7 +487,7 @@ public class Interface extends JFrame implements MouseListener{
 					break;	
 				}
 				g1.setStrat(strat);
-				JPanel panel = new GraphicsPanel(g1);
+				panel = new GraphicsPanel(g1);
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
 				frame.pack();

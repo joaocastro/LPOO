@@ -127,6 +127,18 @@ public class ManualMaze extends JPanel implements MouseListener{
 					g.drawImage(sleepingdragon, x, y, sizeObj_H, sizeObj_V, null);
 				}
 				
+				if (sword_created && hero_created)
+					if (jogo.win())
+					{
+						super.paintComponent(g);
+						g.drawImage(won,  0, 0, null);
+					}
+					if (!jogo.check())
+					{
+						super.paintComponent(g);
+						g.drawImage(lost, 0, 0, null);	
+					}
+				
 				x+=sizeObj_H;
 			}
 			x = 0;
