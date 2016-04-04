@@ -131,22 +131,7 @@ public class Interface {
 		comboBox.addItem("Móveis");
 		comboBox.addItem("Móveis com sono");
 		frame.getContentPane().add(comboBox);
-		
-		String s = comboBox.getActionCommand();
-		String strat  = "";
-		
-		switch(s){
-		case "Estáticos":
-			strat = "1";
-			break;
-		case "Móveis":
-			strat = "2";
-			break;
-		case "Móveis com sono":
-			strat = "3";
-			break;	
-		}
-		
+				
 		JLabel lblTipoDeDrages = new JLabel("Tipo de drag\u00F5es");
 		lblTipoDeDrages.setBounds(10, 80, 95, 14);
 		frame.getContentPane().add(lblTipoDeDrages);
@@ -158,6 +143,8 @@ public class Interface {
 		JLabel lblNmeroDeDrages = new JLabel("N\u00FAmero de drag\u00F5es");
 		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
+		
+		String s = "";
 
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
@@ -225,6 +212,21 @@ public class Interface {
 					Labirinto.setText("Parabens, ganhou o jogo!");
 				else
 					Labirinto.setText(g1.getMaze().toString());
+				
+				String s = comboBox.getActionCommand();
+				String strat  = "";
+				
+				switch(s){
+				case "Estáticos":
+					strat = "1";
+					break;
+				case "Móveis":
+					strat = "2";
+					break;
+				case "Móveis com sono":
+					strat = "3";
+					break;	
+				}
 				
 				g1.Strategy(s);
 				g1.updateBoard();
@@ -298,7 +300,7 @@ public class Interface {
 				Esquerda.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
-				g1.setStrat(s);
+				g1.setStrat("2");
 				JPanel panel = new GraphicsPanel(g1);
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
