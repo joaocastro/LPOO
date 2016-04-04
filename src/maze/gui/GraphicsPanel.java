@@ -134,7 +134,7 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 				{
 					g.drawImage(wall,  x, y, sizeObj_H, sizeObj_V, null);
 				}
-				if (jogo.getMaze().getTable()[i][j]=='D')
+				if (jogo.getMaze().getTable()[i][j]=='D' || jogo.getMaze().getTable()[i][j]=='F')
 				{
 					g.drawImage(dragon,  x, y, sizeObj_H, sizeObj_V, null);
 				}

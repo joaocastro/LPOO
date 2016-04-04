@@ -155,10 +155,39 @@ public class Game {
 		int size;
 		System.out.println("Tamanho do tabuleiro:");
 		size = scn.nextInt();
+		
+		if (size % 2 == 0 || size <=3) {
+			do {
+				System.out.println("\nTamanho inválido. O tamanho tem de ser ímpar e maior que 3. Insira um novo tamanho:");
+				size = scn.nextInt();
+			} while (size % 2 == 0 || size<=3);
+		}
+
+		addMaze(size);
+		
+		int possDrag = 0;
+		
+		for (int i =0 ; i< size; i++)
+			for (int j = 0;j < size; j++){
+				if (maze.getTable()[i][j] == ' ')
+					possDrag++;
+			}
+		
+		int maxDrag = possDrag - 3;
+		if (maxDrag <0 )
+			maxDrag = 0;
+		
 		System.out.println("\nNumero de Dragoes desejado");
 		numberdragons = scn.nextInt();
 		
-		addMaze(size);
+		if (numberdragons > (maxDrag)) {
+			do {
+				System.out.println("\nNumero invalido de dragoes, o numero de dragoes terá de ser no maximo ");
+				System.out.print((maxDrag));
+				System.out.println("\nInsira novamente o numero de dragoes: ");
+				numberdragons = scn.nextInt();
+			} while (numberdragons > (maxDrag));
+		}
 
 		createDragons(numberdragons);
 		updateBoard();
