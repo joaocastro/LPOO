@@ -22,6 +22,14 @@ public class MazeBuilder {
 	}
 	
 	/**
+	 * Returns the size of the maze
+	 * @return
+	 */
+	public int getSize(){
+		return size;
+	}
+	
+	/**
 	 * Generates a random maze
 	 * @return maze
 	 */

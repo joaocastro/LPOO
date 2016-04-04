@@ -180,6 +180,8 @@ public class Labirinto extends character{
 	 */
 	public void setTable(char[][] tab){
 		table = tab;
+		lines = tab[0].length;
+		columns = tab[0].length;
 	}
 	
 	

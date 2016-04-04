@@ -62,7 +62,9 @@ public class Game {
 	/**
 	 * Game constructor
 	 */
-	public Game(){}
+	public Game(){
+		dragons = new ArrayList<dragon>();
+	}
 	
 	
 	/**
@@ -355,6 +357,14 @@ public class Game {
 	}
 	
 	/**
+	 * Sets the game maze
+	 * @param l
+	 */
+	public void setMaze(Labirinto l){
+		maze = l;
+	}
+	
+	/**
 	 * Main function
 	 * @param args
 	 */
@@ -409,5 +419,29 @@ public class Game {
 	 */
 	public String getStrat(){
 		return strat;
+	}
+	
+	/**
+	 * Adds a dragon to the dragon array
+	 * @param d
+	 */
+	public void addDragon(dragon d){
+		dragons.add(d);
+	}
+	
+	/**
+	 * Sets a sword in the game
+	 * @param h
+	 */
+	public void setSword(sword s){
+		espada = s;
+	}
+	
+	/**
+	 * Sets a hero in the game
+	 * @param h
+	 */
+	public void setHero(hero h){
+		heroi = h;
 	}
 }

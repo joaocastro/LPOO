@@ -111,6 +111,7 @@ public class hero extends character{
 				if(tipo == 'A'){
 					findDragon(dragons, pos_x + 1, pos_y).changeState();
 					pos_x++;
+					killDragonsAround(dragons);
 				}
 			}
 			else if (lab.getTable()[pos_x + 1][pos_y] == 'S' && tipo == 'A')
@@ -126,8 +127,6 @@ public class hero extends character{
 			break;
 		case "e":
 		case "E":
-			if ((pos_y + 1) >= lab.getColumns())
-				return;
 			if (lab.getTable()[pos_x][pos_y + 1] == ' ')
 			{
 				pos_y++;
@@ -143,6 +142,7 @@ public class hero extends character{
 				if(tipo == 'A'){
 					findDragon(dragons, pos_x, pos_y + 1).changeState();
 					pos_y++;
+					killDragonsAround(dragons);
 				}
 			}
 			else if (lab.getTable()[pos_x][pos_y + 1] == 'S' && tipo == 'A')
@@ -173,6 +173,7 @@ public class hero extends character{
 				if(tipo == 'A'){
 					findDragon(dragons, pos_x, pos_y - 1).changeState();
 					pos_y--;
+					killDragonsAround(dragons);
 				}
 			}
 			else if (lab.getTable()[pos_x][pos_y - 1] == 'S' && tipo == 'A')
