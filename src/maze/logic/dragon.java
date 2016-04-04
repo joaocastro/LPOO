@@ -119,7 +119,7 @@ public class dragon extends character{
 	 */
 	public boolean checkmove(Labirinto lab, int x, int y) {
 		
-		if (lab.getTable()[x][y] != 'X' && lab.getTable()[x][y] != 'S')
+		if (lab.getTable()[x][y] == ' ' || lab.getTable()[x][y] == 'E' )
 			return true;
 		else
 			return false;
