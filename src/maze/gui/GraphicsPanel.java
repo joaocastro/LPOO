@@ -19,7 +19,7 @@ import java.io.File;
 public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 
 	private Game jogo;
-	private Image wall, floor, dragon, sword, exit, hero, herowithsword, lost, won;
+	private Image wall, floor, dragon, sword, exit, hero, herowithsword, lost, won, sleepingdragon;
 	private int x1 = 0, y1 = 0, x2 = 0, y2 = 0;
 	private int size;
 	
@@ -42,6 +42,7 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 		herowithsword = new ImageIcon("heroicomespada.png").getImage();
 		lost = new ImageIcon("perdeu.png").getImage();
 		won = new ImageIcon("ganhou.png").getImage();
+		sleepingdragon = new ImageIcon("dragao_a_dormir.png").getImage();
 		size = wall.getWidth(null);
 		
 		addKeyListener(new KeyListener() {
@@ -152,6 +153,10 @@ public class GraphicsPanel extends JPanel /*implements KeyListener*/ {
 				if (jogo.getMaze().getTable()[i][j]=='A')
 				{
 					g.drawImage(herowithsword, x, y, sizeObj_H, sizeObj_V, null);
+				}
+				if (jogo.getMaze().getTable()[i][j] == 'd')
+				{
+					g.drawImage(sleepingdragon, x, y, sizeObj_H, sizeObj_V, null);
 				}
 				if (jogo.win())
 				{

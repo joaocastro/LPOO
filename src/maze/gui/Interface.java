@@ -143,8 +143,7 @@ public class Interface {
 		JLabel lblNmeroDeDrages = new JLabel("N\u00FAmero de drag\u00F5es");
 		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
-		
-		String s = "";
+
 
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
@@ -160,7 +159,7 @@ public class Interface {
 				else
 					Labirinto.setText(g1.getMaze().toString());
 				
-				g1.Strategy(s);
+				g1.Strategy(g1.getStrat());
 				g1.updateBoard();
 				
 				if(!g1.check())
@@ -187,7 +186,7 @@ public class Interface {
 				else
 					Labirinto.setText(g1.getMaze().toString());
 				
-				g1.Strategy(s);
+				g1.Strategy(g1.getStrat());
 				g1.updateBoard();
 				
 				if(!g1.check())
@@ -213,22 +212,7 @@ public class Interface {
 				else
 					Labirinto.setText(g1.getMaze().toString());
 				
-				String s = comboBox.getActionCommand();
-				String strat  = "";
-				
-				switch(s){
-				case "Estáticos":
-					strat = "1";
-					break;
-				case "Móveis":
-					strat = "2";
-					break;
-				case "Móveis com sono":
-					strat = "3";
-					break;	
-				}
-				
-				g1.Strategy(s);
+				g1.Strategy(g1.getStrat());
 				g1.updateBoard();
 				
 				if(!g1.check())
@@ -254,7 +238,7 @@ public class Interface {
 				else
 					Labirinto.setText(g1.getMaze().toString());
 				
-				g1.Strategy(s);
+				g1.Strategy(g1.getStrat());
 				g1.updateBoard();
 				
 				if(!g1.check())
@@ -300,7 +284,21 @@ public class Interface {
 				Esquerda.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
-				g1.setStrat("2");
+				String s = (String)comboBox.getSelectedItem();
+				String strat  = "";
+				
+				switch(s){
+				case "Estáticos":
+					strat = "1";
+					break;
+				case "Móveis":
+					strat = "2";
+					break;
+				case "Móveis com sono":
+					strat = "3";
+					break;	
+				}
+				g1.setStrat(strat);
 				JPanel panel = new GraphicsPanel(g1);
 				panel.setBounds(20, 20, 700, 700);
 				frame.getContentPane().add(panel);
