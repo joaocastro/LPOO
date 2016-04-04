@@ -12,6 +12,8 @@ import javax.swing.JComboBox;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
@@ -33,13 +35,14 @@ import maze.gui.GraphicsPanel;
 import javax.imageio.ImageIO;
 import javax.swing.DropMode;
 
-public class Interface {
+public class Interface extends JFrame implements MouseListener{
 
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextArea Labirinto;
-
+	private ManualMaze manual;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -63,6 +66,7 @@ public class Interface {
 	 */
 	public Interface() throws IOException {
 		initialize();
+		addMouseListener(this);
 	}
 
 	/**
@@ -119,6 +123,7 @@ public class Interface {
 		JButton btnGerarLabirintoManual = new JButton("Gerar Labirinto Manual");
 		btnGerarLabirintoManual.setBounds(146, 159, 164, 36);
 		frame.getContentPane().add(btnGerarLabirintoManual);
+
 		textField_1.setBounds(227, 51, 106, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
@@ -274,13 +279,85 @@ public class Interface {
 		Labirinto.setVisible(false);
 
 		Labirinto.setEnabled(true);
-
-		btnNewButton.addActionListener(new ActionListener() {
+		
+		JComboBox objetos = new JComboBox();
+		objetos.setBounds(700, 20, 106, 20);
+		objetos.addItem("Parede");
+		objetos.addItem("Saida");
+		objetos.addItem("Espada");
+		objetos.addItem("Heroi");
+		objetos.addItem("Dragao");
+		objetos.addItem("Caminho");
+		frame.getContentPane().add(objetos);
+		objetos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				manual.setSelectedItem((String)objetos.getSelectedItem());
+			}
+		});
+		
+		JButton playCreated = new JButton("Jogar!");
+		playCreated.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				lblNewLabel.setVisible(false);
 				lblNewLabel_1.setVisible(false);
 				btnNewButton.setVisible(false);
 				comboBox.setVisible(false);
+				objetos.setVisible(false);
+				lblTipoDeDrages.setVisible(false);
+				textField.setVisible(false);
+				textField_1.setVisible(false);
+				lblDimensoDoLabirinto.setVisible(false);
+				lblNmeroDeDrages.setVisible(false);
+				btnNewButton_13.setVisible(false);
+				Cima.setVisible(false);
+				Baixo.setVisible(false);
+				Direita.setVisible(false);
+				Esquerda.setVisible(false);
+				playCreated.setVisible(false);
+				btnGerarLabirintoManual.setVisible(false);
+				frame.setPreferredSize(new Dimension (700, 700));
+				//Labirinto.setText(g1.getMaze().toString());
+				Labirinto.setVisible(false);
+				String s = (String)comboBox.getSelectedItem();
+				String strat  = "";
+				
+				switch(s){
+				case "Estáticos":
+					strat = "1";
+					break;
+				case "Móveis":
+					strat = "2";
+					break;
+				case "Móveis com sono":
+					strat = "3";
+					break;	
+				}
+
+				Game jogo = manual.getGame();
+				jogo.setStrat(strat);
+				JPanel panel = new GraphicsPanel(jogo);
+				panel.setBounds(20, 20, 700, 700);
+				frame.getContentPane().add(panel);
+				frame.pack();
+				
+				if (jogo.win())
+					System.exit(0);
+				
+				panel.setFocusable(true);
+				panel.requestFocus();
+				panel.repaint();
+
+			}
+		});
+		playCreated.setBounds(700, 80, 164, 36);
+		frame.getContentPane().add(playCreated);
+		
+		btnGerarLabirintoManual.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblNewLabel.setVisible(false);
+				lblNewLabel_1.setVisible(false);
+				btnNewButton.setVisible(false);
+				comboBox.setBounds(700, 50, 106, 20);
 				lblTipoDeDrages.setVisible(false);
 				textField.setVisible(false);
 				textField_1.setVisible(false);
@@ -294,9 +371,41 @@ public class Interface {
 				btnGerarLabirintoManual.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
+				
+				manual = new ManualMaze(Integer.parseInt(textField.getText()));
+				frame.getContentPane().add(manual);
+				frame.setPreferredSize(new Dimension (1200, 700));
+				manual.setBounds(20, 20, 650, 650);
+				frame.pack();
+				manual.setFocusable(true);
+				manual.requestFocus();
+				manual.repaint();
+			}
+		});
+
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				lblNewLabel.setVisible(false);
+				lblNewLabel_1.setVisible(false);
+				btnNewButton.setVisible(false);
+				comboBox.setVisible(false);
+				objetos.setVisible(false);
+				lblTipoDeDrages.setVisible(false);
+				textField.setVisible(false);
+				textField_1.setVisible(false);
+				lblDimensoDoLabirinto.setVisible(false);
+				lblNmeroDeDrages.setVisible(false);
+				btnNewButton_13.setVisible(false);
+				Cima.setVisible(false);
+				Baixo.setVisible(false);
+				Direita.setVisible(false);
+				Esquerda.setVisible(false);
+				btnGerarLabirintoManual.setVisible(false);
+				//Labirinto.setText(g1.getMaze().toString());
+				Labirinto.setVisible(false);
 				String s = (String)comboBox.getSelectedItem();
 				String strat  = "";
-				
+
 				switch(s){
 				case "Estáticos":
 					strat = "1";
@@ -319,5 +428,36 @@ public class Interface {
 			}
 		});
 
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -16,7 +16,7 @@ import maze.cli.Game;
 import java.awt.event.*;
 import java.io.File;
 
-public class GraphicsPanel extends JPanel implements MouseListener {
+public class GraphicsPanel extends JPanel {
 
 	private Game jogo;
 	private Image wall, floor, dragon, sword, exit, hero, herowithsword, lost, won, sleepingdragon;
@@ -42,7 +42,7 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 		herowithsword = new ImageIcon("heroicomespada.png").getImage();
 		lost = new ImageIcon("perdeu.png").getImage();
 		won = new ImageIcon("ganhou.png").getImage();
-		sleepingdragon = new ImageIcon("dragao_a_dormir.png").getImage();
+		sleepingdragon = new ImageIcon("dragaodormir.png").getImage();
 		size = wall.getWidth(null);
 		
 		addKeyListener(new KeyListener() {
@@ -178,7 +178,7 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 
     
 	
-	@Override
+	/*@Override
 	public void mouseClicked(MouseEvent arg0) {
 		
 		this.x1=arg0.getX();
@@ -215,7 +215,7 @@ public class GraphicsPanel extends JPanel implements MouseListener {
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
-	}
+	}*/
 	
 
 }

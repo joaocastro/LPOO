@@ -81,6 +81,23 @@ public class Labirinto extends character{
 	}
 	
 	/**
+	 * Finds the exit of the maze
+	 */
+	public void setExit(){
+		for (int i=0; i<lines; i++)
+		{
+			for(int j=0; j<columns; j++)
+			{
+				if(table[i][j] == 'S'){
+					exit_x = i;
+					exit_y = j;
+					break;
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Prints the maze
 	 */
 	public void printBoard(){
