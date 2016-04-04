@@ -102,7 +102,6 @@ public class Interface extends JFrame implements MouseListener{
 
 		textField = new JTextField();
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setText("11");
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 			boolean got = false;	
@@ -130,7 +129,6 @@ public class Interface extends JFrame implements MouseListener{
 
 		textField_1 = new JTextField();
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_1.setText("1");
 		textField_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean got = false;
@@ -209,7 +207,7 @@ public class Interface extends JFrame implements MouseListener{
 					manual.repaint();
 			}
 		});
-		Cima.setBounds(293, 114, 90, 40);
+		Cima.setBounds(620, 0, 80, 30);
 		frame.getContentPane().add(Cima);
 
 		JButton Esquerda = new JButton("Esquerda");
@@ -242,7 +240,7 @@ public class Interface extends JFrame implements MouseListener{
 					manual.repaint();
 			}
 		});
-		Esquerda.setBounds(237, 157, 90, 40);
+		Esquerda.setBounds(620, 120, 80, 30);
 		frame.getContentPane().add(Esquerda);
 
 		JButton Direita = new JButton("Direita");
@@ -275,7 +273,7 @@ public class Interface extends JFrame implements MouseListener{
 					manual.repaint();
 			}
 		});
-		Direita.setBounds(335, 157, 90, 40);
+		Direita.setBounds(620, 80, 80, 30);
 		frame.getContentPane().add(Direita);
 
 		JButton Baixo = new JButton("Baixo");
@@ -308,7 +306,7 @@ public class Interface extends JFrame implements MouseListener{
 					manual.repaint();
 			}
 		});
-		Baixo.setBounds(293, 199, 90, 40);
+		Baixo.setBounds(620, 40, 80, 30);
 		frame.getContentPane().add(Baixo);
 
 		JButton btnNewButton = new JButton("Gerar Novo Labirinto");
