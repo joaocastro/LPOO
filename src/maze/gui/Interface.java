@@ -88,7 +88,7 @@ public class Interface {
 
 			}
 		});
-		btnNewButton_13.setBounds(293, 58, 131, 36);
+		btnNewButton_13.setBounds(146, 201, 164, 36);
 		frame.getContentPane().add(btnNewButton_13);
 
 		textField = new JTextField();
@@ -98,12 +98,12 @@ public class Interface {
 				g1.addMaze(Integer.parseInt(textField.getText()));
 			}
 		});
-		textField.setBounds(137, 11, 106, 20);
+		textField.setBounds(227, 17, 106, 20);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 
 		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(159, 14, 46, 14);
+		lblNewLabel.setBounds(264, 20, 46, 14);
 		frame.getContentPane().add(lblNewLabel);
 
 		//g1.updateBoard();
@@ -115,38 +115,43 @@ public class Interface {
 				g1.createDragons(Integer.parseInt(textField_1.getText()));
 			}
 		});
-		textField_1.setBounds(137, 45, 106, 20);
+		
+		JButton btnGerarLabirintoManual = new JButton("Gerar Labirinto Manual");
+		btnGerarLabirintoManual.setBounds(146, 159, 164, 36);
+		frame.getContentPane().add(btnGerarLabirintoManual);
+		textField_1.setBounds(227, 51, 106, 20);
 		frame.getContentPane().add(textField_1);
 		textField_1.setColumns(10);
 
 		//g1.updateBoard();
 
 		JLabel lblNewLabel_1 = new JLabel("New label");
-		lblNewLabel_1.setBounds(159, 48, 46, 14);
+		lblNewLabel_1.setBounds(237, 51, 46, 20);
 		frame.getContentPane().add(lblNewLabel_1);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(137, 77, 106, 20);
+		comboBox.setBounds(227, 83, 106, 20);
 		comboBox.addItem("Estáticos");
 		comboBox.addItem("Móveis");
 		comboBox.addItem("Móveis com sono");
 		frame.getContentPane().add(comboBox);
 				
 		JLabel lblTipoDeDrages = new JLabel("Tipo de drag\u00F5es");
-		lblTipoDeDrages.setBounds(10, 80, 95, 14);
+		lblTipoDeDrages.setBounds(100, 86, 95, 14);
 		frame.getContentPane().add(lblTipoDeDrages);
 
 		JLabel lblDimensoDoLabirinto = new JLabel("Dimens\u00E3o do Labirinto");
-		lblDimensoDoLabirinto.setBounds(10, 14, 117, 14);
+		lblDimensoDoLabirinto.setBounds(100, 20, 117, 14);
 		frame.getContentPane().add(lblDimensoDoLabirinto);
 
 		JLabel lblNmeroDeDrages = new JLabel("N\u00FAmero de drag\u00F5es");
-		lblNmeroDeDrages.setBounds(10, 48, 106, 14);
+		lblNmeroDeDrages.setBounds(100, 54, 106, 14);
 		frame.getContentPane().add(lblNmeroDeDrages);
 
 
 		JButton Cima = new JButton("Cima");
 		Cima.setEnabled(false);
+		Cima.setVisible(false);
 		Cima.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g1.updateBoard();
@@ -174,6 +179,7 @@ public class Interface {
 
 		JButton Esquerda = new JButton("Esquerda");
 		Esquerda.setEnabled(false);
+		Esquerda.setVisible(false);
 		Esquerda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g1.updateBoard();
@@ -200,6 +206,7 @@ public class Interface {
 
 		JButton Direita = new JButton("Direita");
 		Direita.setEnabled(false);
+		Direita.setVisible(false);
 		Direita.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g1.updateBoard();
@@ -226,6 +233,7 @@ public class Interface {
 
 		JButton Baixo = new JButton("Baixo");
 		Baixo.setEnabled(false);
+		Baixo.setVisible(false);
 		Baixo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				g1.updateBoard();
@@ -252,7 +260,7 @@ public class Interface {
 
 		JButton btnNewButton = new JButton("Gerar Novo Labirinto");
 
-		btnNewButton.setBounds(293, 11, 131, 36);
+		btnNewButton.setBounds(146, 116, 164, 36);
 		frame.getContentPane().add(btnNewButton);
 
 		Labirinto = new JTextArea();
@@ -263,6 +271,7 @@ public class Interface {
 		Labirinto.setBounds(10, 114, 217, 137);
 		frame.getContentPane().add(Labirinto);
 		Labirinto.setColumns(10);
+		Labirinto.setVisible(false);
 
 		Labirinto.setEnabled(true);
 
@@ -282,6 +291,7 @@ public class Interface {
 				Baixo.setVisible(false);
 				Direita.setVisible(false);
 				Esquerda.setVisible(false);
+				btnGerarLabirintoManual.setVisible(false);
 				Labirinto.setText(g1.getMaze().toString());
 				Labirinto.setVisible(false);
 				String s = (String)comboBox.getSelectedItem();
@@ -310,5 +320,4 @@ public class Interface {
 		});
 
 	}
-
 }
