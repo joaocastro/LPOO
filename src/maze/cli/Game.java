@@ -82,11 +82,32 @@ public class Game {
 		updateBoard();
 	}
 	
+	public void validDragons(int number) throws IllegalArgumentException{
+		
+		int count = 0;
+		
+		for (int i=0; i<maze.getLines();i++)
+		{
+			for(int j=0; j<maze.getLines(); j++)
+			{
+				if (maze.getTable()[i][j]==' ')
+				{
+					count++;
+				}
+			}
+		}
+		
+		if (number>(count-3))
+			throw new IllegalArgumentException();
+	}
+	
 	/**
 	 * Generates a number of dragons in the maze in random available positions
 	 * @param number
 	 */
-	public void createDragons(int number){
+	public void createDragons(int number) throws IllegalArgumentException{
+		
+			
 		while (number>0)
 		{
 			Random rn = new Random();

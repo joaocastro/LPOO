@@ -42,6 +42,7 @@ public class Interface extends JFrame implements MouseListener{
 	private JTextField textField_1;
 	private JTextArea Labirinto;
 	private ManualMaze manual;
+	private JTextField textField_2;
 	
 	/**
 	 * Launch the application.
@@ -99,6 +100,14 @@ public class Interface extends JFrame implements MouseListener{
 		textField.setHorizontalAlignment(SwingConstants.LEFT);
 		textField.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				
+				try {
+					g1.validDragons(Integer.parseInt(textField_1.getText())); //
+					}
+				catch (IllegalArgumentException a){
+					textField_2.setText("Argumento Inválido");
+					}
+					
 				g1.addMaze(Integer.parseInt(textField.getText()));
 			}
 		});
@@ -116,7 +125,16 @@ public class Interface extends JFrame implements MouseListener{
 		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
 		textField_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				try {
+				g1.validDragons(Integer.parseInt(textField_1.getText()));
+				}
+				catch (IllegalArgumentException a){
+					textField_2.setText("Argumento Inválido");
+				}
+				
 				g1.createDragons(Integer.parseInt(textField_1.getText()));
+				
 			}
 		});
 		
@@ -351,6 +369,12 @@ public class Interface extends JFrame implements MouseListener{
 		});
 		playCreated.setBounds(700, 80, 164, 36);
 		frame.getContentPane().add(playCreated);
+		
+		textField_2 = new JTextField();
+		textField_2.setEditable(false);
+		textField_2.setBounds(100, 0, 233, 14);
+		frame.getContentPane().add(textField_2);
+		textField_2.setColumns(10);
 		
 		btnGerarLabirintoManual.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
